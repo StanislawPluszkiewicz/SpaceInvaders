@@ -33,8 +33,8 @@ namespace SpaceInvaders.Entities
                 return components[componentClass.Name];
             } catch (KeyNotFoundException e)
             {
-                Console.WriteLine("Entity has no component of type " + componentClass.Name);
-                throw new KeyNotFoundException(e.Message);
+                // L'entite peut ne pas avoir un type de Component
+                return null;
             }
         }
         #endregion Components

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Components;
 
 namespace SpaceInvaders
 {
@@ -55,8 +56,8 @@ namespace SpaceInvaders
             this.gameSize = gameSize;
             Engine = new Engine();
             Entity joueur = new Joueur(Image.FromFile("../../Resources/ship1.png"));
-
             Engine.AddEntity(joueur);
+            ((TransformComponent)joueur.GetComponent(typeof(TransformComponent))).Position+= ;
 
         }
 

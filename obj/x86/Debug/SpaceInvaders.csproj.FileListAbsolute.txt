@@ -8,7 +8,6 @@ D:\Rest\Visual Studio\SpaceInvaders\SpaceInvaders\obj\x86\Debug\SpaceInvaders.ex
 D:\Rest\Visual Studio\SpaceInvaders\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb
 D:\Rest\Visual Studio\SpaceInvaders\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
 C:\Users\pluszkis\Downloads\SpaceInvaders\SpaceInvaders-master\obj\x86\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
-C:\Users\pluszkis\Downloads\SpaceInvaders\SpaceInvaders-master\obj\x86\Debug\SpaceInvaders.GameForm.resources
 C:\Users\pluszkis\Downloads\SpaceInvaders\SpaceInvaders-master\obj\x86\Debug\SpaceInvaders.Properties.Resources.resources
 C:\Users\pluszkis\Downloads\SpaceInvaders\SpaceInvaders-master\obj\x86\Debug\SpaceInvaders.Systems.Render.RenderSystem.resources
 C:\Users\pluszkis\Downloads\SpaceInvaders\SpaceInvaders-master\obj\x86\Debug\SpaceInvaders.Utils.RenderForm.resources

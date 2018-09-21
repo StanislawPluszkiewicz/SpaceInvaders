@@ -1,27 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Systems;
+using SpaceInvaders.Systems.Move;
+using SpaceInvaders.Systems.Render;
 using SpaceInvaders.Utils;
 
 namespace SpaceInvaders
 {
     class Engine
     {
-        public List<Entity> entities;
-        public SystemManager systemManager;
+        /// <summary>
+        /// State of the keyboard
+        /// </summary>
+        public HashSet<Keys> keyPressed;
+        public static Engine instance = null;
 
+        private List<ISystem> systems;
+        private RenderSystem renderSystem;
+        public BufferedGraphics BufferedGraphics { get; set; }
+
+        private List<Entity> entities;
         // Nodes
-        public Dictionary<Entity, List<Node>> nodesByEntity;
+        private Dictionary<Entity, List<Node>> nodesByEntity;
         public Dictionary<Type, List<Node>> nodesByType;
         private IEnumerable<Type> nodeTypes;
 
-        public Engine()
+        private Engine()
         {
+            keyPressed = new HashSet<Keys>();
+            systems = new List<ISystem>();
             entities = new List<Entity>();
-            systemManager = new SystemManager();
             nodesByEntity = new Dictionary<Entity, List<Node>>();
             nodesByType = new Dictionary<Type, List<Node>>();
 
@@ -32,6 +45,22 @@ namespace SpaceInvaders
                 .GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(Node)));
             
+            foreach(Type type in nodeTypes)
+            {
+                nodesByType[type] = new List<Node>();
+            }
+
+            renderSystem = new RenderSystem();
+            AddSystem(new MoveSystem());
+        }
+
+        public static Engine CreateEngine()
+        {
+            if (instance == null)
+            {
+                instance = new Engine();
+            }
+            return instance;
         }
 
         public void AddEntity(Entity entity)
@@ -67,17 +96,42 @@ namespace SpaceInvaders
             }
         }
 
-        private void AddSystem(Systems.ISystem system)
+        private void AddSystem(ISystem system)
         {
-            systemManager.AddSystem(system);
+            systems.Add(system);
         }
 
-        private void RemoveSystem(Systems.ISystem system)
+        private void RemoveSystem(ISystem system)
         {
-            systemManager.RemoveSystem(system);
+            try
+            {
+                systems.Remove(system);
+            }
+            catch (KeyNotFoundException e)
+            {
+                Console.WriteLine("SystemManager has no system " + system.GetType().Name);
+                throw new KeyNotFoundException(e.Message);
+            }
         }
 
+        public void Update(double deltaTime)
+        {
+            foreach (ISystem system in systems)
+            {
+                system.Update(deltaTime);
+            }
+        }
 
+        public void Render(double deltaTime)
+        {
+            Graphics g = instance.BufferedGraphics.Graphics;
+            instance.BufferedGraphics.Graphics.Clear(Color.White);
+
+            renderSystem.Update(deltaTime);
+
+            instance.BufferedGraphics.Render(Engine.instance.BufferedGraphics.Graphics);
+            // TODO recreer ce bug en partant du projet de base
+        }
 
 
     }

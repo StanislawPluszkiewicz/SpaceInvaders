@@ -9,28 +9,28 @@ namespace SpaceInvaders.Systems
 {
     abstract class Node
     {
-        private Dictionary<string, Component> components;
+        private Dictionary<Type, Component> components;
 
         public Node()
         {
-            components = new Dictionary<string, Component>();
+            components = new Dictionary<Type, Component>();
         }
 
         public void AddComponent(Component component)
         {
-            components.Add(component.GetType().Name, component);
+            components.Add(component.GetType(), component);
         }
 
         public void RemoveComponent(Type componentClass)
         {
-            components.Remove(componentClass.Name);
+            components.Remove(componentClass);
         }
 
         public Component GetComponent(Type componentClass)
         {
             try
             {
-                return components[componentClass.Name];
+                return components[componentClass];
             }
             catch (KeyNotFoundException e)
             {

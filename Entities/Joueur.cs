@@ -10,15 +10,13 @@ namespace SpaceInvaders
 {
     class Joueur : Entity
     {
-        TransformComponent Transform { get; set; }
-        VelocityComponent Velocity { get; set; }
-        RenderComponent Render { get; set; }
 
         public Joueur(Image image) : base()
         {
-            Transform = new TransformComponent();
-            Velocity = new VelocityComponent();
-            Render = new RenderComponent(image);
+            AddComponent(new TransformComponent());
+            AddComponent(new VelocityComponent());
+            AddComponent(new RenderComponent(image));
+
         }
 
     }

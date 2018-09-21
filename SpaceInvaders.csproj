@@ -50,12 +50,6 @@
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Joueur.cs" />
     <Compile Include="Systems\Move\MoveNode.cs" />
     <Compile Include="Systems\Render\RenderNode.cs" />
@@ -70,12 +64,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Systems\Render\RenderSystem.cs" />
-    <Compile Include="Systems\SystemManager.cs" />
     <Compile Include="Utils\Vecteur2D.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

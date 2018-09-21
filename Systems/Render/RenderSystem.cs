@@ -13,21 +13,19 @@ namespace SpaceInvaders.Systems.Render
 {
     public class RenderSystem : ISystem
     {
-        List<RenderNode> renderNodes;
         RenderForm form = null;
 
         public RenderSystem()
         {
-            renderNodes = new List<RenderNode>();
-            form = RenderForm.CreateRenderForm();
+            form = RenderForm.instance;
         }
 
 
         public void Update(double time)
         {
-            foreach(RenderNode target in renderNodes)
+            foreach(RenderNode target in Engine.instance.nodesByType[typeof(RenderNode)])
             {
-                
+                RenderForm.Render(Engine.instance.BufferedGraphics.Graphics, target);
             }
         }
     }

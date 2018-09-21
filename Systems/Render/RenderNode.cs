@@ -9,13 +9,11 @@ namespace SpaceInvaders.Systems.Render
 {
     class RenderNode: Node
     {
-        public TransformComponent Transform { get; set; }
-        public RenderComponent Render { get; set; }
 
         public RenderNode(Entity entity)
         {
-            Transform = (TransformComponent)entity.GetComponent(typeof(TransformComponent));
-            Render = (RenderComponent)entity.GetComponent(typeof(RenderComponent));
+            AddComponent((TransformComponent)entity.GetComponent(typeof(TransformComponent)));
+            AddComponent((RenderComponent)entity.GetComponent(typeof(RenderComponent)));
         }
 
         public new static bool HasToBeCreated(Entity entity)

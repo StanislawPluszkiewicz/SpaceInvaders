@@ -52,13 +52,22 @@ namespace SpaceInvaders
         /// <param name="gameSize">Size of the game area</param>
         private Game(Size gameSize)
         {
-
+            
             this.gameSize = gameSize;
-            Engine = new Engine();
+            Engine = Engine.CreateEngine();
+
+
             Entity joueur = new Joueur(Image.FromFile("../../Resources/ship1.png"));
             Engine.AddEntity(joueur);
-            ((TransformComponent)joueur.GetComponent(typeof(TransformComponent))).Position+= ;
+            TransformComponent transform = (TransformComponent)joueur.GetComponent(typeof(TransformComponent));
+            transform.Position.x += 100;
+            transform.Position.y += 200;
 
+        }
+
+        public void update(double deltaTime)
+        {
+            Engine.Update(deltaTime);
         }
 
         #endregion

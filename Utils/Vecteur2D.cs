@@ -12,17 +12,19 @@ namespace SpaceInvaders.Utils
         /// Points
         /// </summary>
         public double x, y;
+        public double Norme
+        {
+            get
+            {
+                return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            }
+        }
 
 
         public Vecteur2D(double _x = 0, double _y = 0)
         {
             x = _x;
             y = _y;
-        }
-
-        public double Norme()
-        {
-            return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
         }
 
         public static Vecteur2D operator+ (Vecteur2D v1, Vecteur2D v2)
@@ -45,6 +47,10 @@ namespace SpaceInvaders.Utils
             return new Vecteur2D(k * v.x, k * v.y);
         }
 
+        public static Vecteur2D operator *(Vecteur2D v1, Vecteur2D v2)
+        {
+            return new Vecteur2D(v1.x * v2.x, v1.y * v2.y);
+        }
 
         public static Vecteur2D operator* (Vecteur2D v, double k)
         {

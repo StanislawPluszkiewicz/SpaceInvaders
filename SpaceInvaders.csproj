@@ -49,10 +49,16 @@
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Entities\Ennemies\Ennemi.cs" />
+    <Compile Include="Entities\Ennemies\EnnemiBloc.cs" />
+    <Compile Include="Entities\Ennemies\EnnemiLine.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Joueur.cs" />
+    <Compile Include="Entities\Kynematic.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Renderable.cs" />
+    <Compile Include="Systems\MoveEnnemi\MoveEnnemiNode.cs" />
+    <Compile Include="Systems\MoveEnnemi\MoveEnnemiSystem.cs" />
     <Compile Include="Systems\Move\MoveNode.cs" />
-    <Compile Include="Systems\Render\RenderNode.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\Move\MoveSystem.cs" />
@@ -63,7 +69,6 @@
     <Compile Include="Utils\RenderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Systems\Render\RenderSystem.cs" />
     <Compile Include="Utils\Vecteur2D.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -76,9 +81,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Systems\Render\RenderSystem.resx">
-      <DependentUpon>RenderSystem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Utils\RenderForm.resx">
       <DependentUpon>RenderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\IsAlive\" />
+    <Folder Include="Systems\Shoot\" />
     <Folder Include="vendor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

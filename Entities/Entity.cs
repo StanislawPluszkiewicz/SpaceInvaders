@@ -8,29 +8,30 @@ namespace SpaceInvaders.Entities
 {
     abstract class Entity
     {
-    #region Components
-        private Dictionary<string, Component> components = null;
-
-
-        public Entity()
+        protected Entity()
         {
-            components = new Dictionary<string, Component>();
+            components = new Dictionary<Type, Component>();
+            AddComponent(new TransformComponent(this));
         }
+
+    #region Components
+        private Dictionary<Type, Component> components = null;
+
         public void AddComponent(Component component)
         {
-            components.Add(component.GetType().Name, component);
+            components.Add(component.GetType(), component);
         }
 
         public void RemoveComponent(Type componentClass)
         {
-            components.Remove(componentClass.Name);
+            components.Remove(componentClass);
         }
 
         public Component GetComponent(Type componentClass)
         {
             try
             {
-                return components[componentClass.Name];
+                return components[componentClass];
             } catch (KeyNotFoundException e)
             {
                 // L'entite peut ne pas avoir un type de Component

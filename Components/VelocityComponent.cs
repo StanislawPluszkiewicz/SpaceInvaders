@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SpaceInvaders.Entities;
 using SpaceInvaders.Utils;
 
 namespace SpaceInvaders.Components
@@ -11,10 +12,10 @@ namespace SpaceInvaders.Components
         public Vecteur2D Velocity { get; set; }
         public Vecteur2D AngularVelocity { get; set; }
 
-        public VelocityComponent()
+        public VelocityComponent(Entity e) : base(e)
         {
-            Velocity = new Vecteur2D(0,0);
-            AngularVelocity = new Vecteur2D(0, 0);
+            Velocity = new Vecteur2D(1.5,1.5);
+            AngularVelocity = new Vecteur2D(1, 1);
         }
     }
 }

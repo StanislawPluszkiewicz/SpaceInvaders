@@ -6,15 +6,15 @@ namespace SpaceInvaders.Systems.Move
 {
     class MoveNode : Node
     {
-        public TransformComponent transform;
-        public VelocityComponent velocity;
+        public TransformComponent TransformComponent { get; set; }
+        public VelocityComponent VelocityComponent { get; set; }
 
         public MoveNode(Entity entity)
         {
-            this.transform = (TransformComponent) entity.GetComponent(typeof(TransformComponent));
-            this.velocity  = (VelocityComponent)  entity.GetComponent(typeof(VelocityComponent));
+            this.TransformComponent = (TransformComponent) entity.GetComponent(typeof(TransformComponent));
+            this.VelocityComponent  = (VelocityComponent)  entity.GetComponent(typeof(VelocityComponent));
         }
 
-        public new static bool HasToBeCreated(Entity entity) => (entity.GetComponent(typeof(TransformComponent)) != null && entity.GetComponent(typeof(VelocityComponent)) != null);
+        public new static bool HasToBeCreated(Entity entity) => (entity.GetType() == typeof(Player));
     }
 }

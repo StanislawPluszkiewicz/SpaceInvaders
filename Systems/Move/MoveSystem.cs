@@ -10,22 +10,21 @@ namespace SpaceInvaders.Systems.Move
     class MoveSystem : ISystem
     {
 
-        private List<MoveNode> moveNodes;
+        private List<Node> moveNodes;
 
         public MoveSystem()
         {
-            moveNodes = new List<MoveNode>();
         }
 
         public void Update(double time)
         {
-            Vecteur2D movement = new Vecteur2D();
+            moveNodes = Engine.instance.nodesByType[typeof(MoveNode)];
 
-            // if space is pressed
+            Vecteur2D movement = new Vecteur2D();
+            
             if (Engine.instance.keyPressed.Contains(Keys.Left))
             {
                 movement += new Vecteur2D(-time, 0);
-
             }
             if (Engine.instance.keyPressed.Contains(Keys.Right))
             {
@@ -34,7 +33,7 @@ namespace SpaceInvaders.Systems.Move
 
             foreach (MoveNode node in moveNodes)
             {
-                node.transform.Position += movement * node.velocity.Velocity;
+                node.TransformComponent.Position += movement * node.VelocityComponent.Velocity;
             }
         }
 

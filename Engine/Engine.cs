@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Systems;
 using SpaceInvaders.Systems.Move;
-using SpaceInvaders.Systems.Render;
+using SpaceInvaders.Systems.MoveEnnemi;
 using SpaceInvaders.Utils;
 
 namespace SpaceInvaders
@@ -18,13 +18,13 @@ namespace SpaceInvaders
         /// State of the keyboard
         /// </summary>
         public HashSet<Keys> keyPressed;
+
         public static Engine instance = null;
 
         private List<ISystem> systems;
-        private RenderSystem renderSystem;
-        public BufferedGraphics BufferedGraphics { get; set; }
 
         private List<Entity> entities;
+
         // Nodes
         private Dictionary<Entity, List<Node>> nodesByEntity;
         public Dictionary<Type, List<Node>> nodesByType;
@@ -49,9 +49,10 @@ namespace SpaceInvaders
             {
                 nodesByType[type] = new List<Node>();
             }
-
-            renderSystem = new RenderSystem();
+            
             AddSystem(new MoveSystem());
+            AddSystem(new MoveEnnemiSystem());
+
         }
 
         public static Engine CreateEngine()
@@ -122,17 +123,12 @@ namespace SpaceInvaders
             }
         }
 
-        public void Render(double deltaTime)
+        public void Render(Graphics g)
         {
-            Graphics g = instance.BufferedGraphics.Graphics;
-            instance.BufferedGraphics.Graphics.Clear(Color.White);
-
-            renderSystem.Update(deltaTime);
-
-            instance.BufferedGraphics.Render(Engine.instance.BufferedGraphics.Graphics);
-            // TODO recreer ce bug en partant du projet de base
+            foreach(Entity e in entities)
+            {
+                ((Renderable)e).Render(g);
+            }
         }
-
-
     }
 }

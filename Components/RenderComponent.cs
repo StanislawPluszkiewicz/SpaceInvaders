@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using SpaceInvaders.Entities;
 using SpaceInvaders.Utils;
 
 namespace SpaceInvaders.Components
@@ -13,7 +14,7 @@ namespace SpaceInvaders.Components
         public Image Image { get; set; }
         public Vecteur2D View { get; set; }
 
-        public RenderComponent(Image image)
+        public RenderComponent(Entity e, Image image) : base(e)
         {
             Image = image;
             View = new Vecteur2D(0, 0);

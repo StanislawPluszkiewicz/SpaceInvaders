@@ -1,5 +1,7 @@
-﻿using SpaceInvaders.Components;
-using SpaceInvaders.Systems.Render;
+﻿
+
+using SpaceInvaders.Components;
+using SpaceInvaders.Entities;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -28,6 +30,13 @@ namespace SpaceInvaders.Utils
             if (instance == null)
             {
                 instance = new RenderForm();
+
+                Entity joueur = new Player();
+                Engine.instance.AddEntity(joueur);
+
+
+                Entity ennemi = new Ennemi();
+                Engine.instance.AddEntity(ennemi);
             }
             return instance;
         }
@@ -57,7 +66,6 @@ namespace SpaceInvaders.Utils
 
             for (; deltaT >= maxDelta; deltaT -= maxDelta)
                 Engine.instance.Update(maxDelta / 1000.0); // update systems 
-            Engine.instance.Render(maxDelta / 1000.0); // render
 
             // remember the time of this update
             lastTime = nt;
@@ -65,11 +73,21 @@ namespace SpaceInvaders.Utils
             Invalidate();
 
         }
-        public static void Render(Graphics g, RenderNode target)
+
+        /// <summary>
+        /// Paint event of the form, see msdn for help => paint game with double buffering
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GameForm_Paint(object sender, PaintEventArgs e)
         {
-            Image image = ((RenderComponent)target.GetComponent(typeof(RenderComponent))).Image;
-            Vecteur2D view = ((RenderComponent)target.GetComponent(typeof(RenderComponent))).View;
-            g.DrawImage(image, (float)view.x, (float)view.y);
+            BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, e.ClipRectangle);
+            bg.Graphics.Clear(Color.White);
+
+            Engine.instance.Render(bg.Graphics);
+
+            bg.Render();
+            bg.Dispose(); // important pour l'utilisation de mémoire 
         }
 
 
@@ -145,17 +163,7 @@ namespace SpaceInvaders.Utils
         // lets do 5 ms update to avoid quantum effects
         int maxDelta = 5;
         #endregion
-        #region other events
-        /// <summary>
-        /// Paint event of the form, see msdn for help => paint game with double buffering
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GameForm_Paint(object sender, PaintEventArgs e)
-        {
-            BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, e.ClipRectangle);
-            Engine.instance.BufferedGraphics = bg;
-        }
+        #region keyevents
         /// <summary>
         /// Key down event
         /// </summary>
@@ -178,6 +186,9 @@ namespace SpaceInvaders.Utils
         {
 
         }
+        #endregion
+        #region other events
+
         private void RenderForm_Load(object sender, EventArgs e)
         {
 

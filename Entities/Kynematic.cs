@@ -8,15 +8,12 @@ using System.Text;
 
 namespace SpaceInvaders
 {
-    class Joueur : Entity
+    class Kynematic : Renderable
     {
 
-        public Joueur(Image image) : base()
+        public Kynematic(Image image) : base(image)
         {
-            AddComponent(new TransformComponent());
-            AddComponent(new VelocityComponent());
-            AddComponent(new RenderComponent(image));
-
+            AddComponent(new VelocityComponent(this));
         }
 
     }

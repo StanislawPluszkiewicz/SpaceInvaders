@@ -26,3 +26,12 @@ E:\Rest\Visual Studio\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.GenerateR
 E:\Rest\Visual Studio\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
 E:\Rest\Visual Studio\SpaceInvaders\obj\x86\Debug\SpaceInvaders.exe
 E:\Rest\Visual Studio\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\bin\Debug\SpaceInvaders.exe
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\bin\Debug\SpaceInvaders.pdb
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.Properties.Resources.resources
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.Utils.RenderForm.resources
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.csproj.GenerateResource.cache
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.exe
+C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.pdb

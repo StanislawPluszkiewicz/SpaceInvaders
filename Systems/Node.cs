@@ -42,7 +42,7 @@ namespace SpaceInvaders.Systems
         // create this method in children
         // can't create static virtual 
         // neither can create interface with static method 
-        public static bool HasToBeCreated(Entity entity)
+        public static bool HasToBeCreated(GameObject entity)
         {
             throw new NotImplementedException("Should call the child method!");
         }

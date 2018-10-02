@@ -47,25 +47,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\MissileComponent.cs" />
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Entities\Ennemies\Ennemi.cs" />
     <Compile Include="Entities\Ennemies\EnnemiBloc.cs" />
     <Compile Include="Entities\Ennemies\EnnemiLine.cs" />
+    <Compile Include="Entities\MovementType\IDynamic.cs" />
+    <Compile Include="Entities\MovementType\IKynematic.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Kynematic.cs" />
+    <Compile Include="Entities\Missiles\Missile.cs" />
+    <Compile Include="Entities\MovementType\Moveable.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Renderable.cs" />
-    <Compile Include="Systems\MoveEnnemi\MoveEnnemiNode.cs" />
-    <Compile Include="Systems\MoveEnnemi\MoveEnnemiSystem.cs" />
-    <Compile Include="Systems\Move\MoveNode.cs" />
+    <Compile Include="Entities\MovementType\IStatic.cs" />
+    <Compile Include="Scenes\Scene_02_Game.cs" />
+    <Compile Include="Systems\Move\MoveEnnemiLine\MoveEnnemiLineNode.cs" />
+    <Compile Include="Systems\Move\MoveEnnemiLine\MoveEnnemiLineSystem.cs" />
+    <Compile Include="Systems\Move\MoveDynamic\MoveDynamicNode.cs" />
+    <Compile Include="Systems\Move\MoveDynamic\MoveDynamicSystem.cs" />
+    <Compile Include="Systems\Move\MoveKynematic\MoveKynematicNode.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Systems\ISystem.cs" />
-    <Compile Include="Systems\Move\MoveSystem.cs" />
+    <Compile Include="Systems\Move\MoveKynematic\MoveKynematicSystem.cs" />
     <Compile Include="Systems\Node.cs" />
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\OffScreenColider\OffScreenColiderNode.cs" />
+    <Compile Include="Systems\OffScreenColider\OffScreenColiderSystem.cs" />
+    <Compile Include="Systems\Shoot\ShootNode.cs" />
+    <Compile Include="Systems\Shoot\ShootSystem.cs" />
+    <Compile Include="Utils\Maths.cs" />
     <Compile Include="Utils\RenderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,8 +156,6 @@
     <None Include="Resources\shoot1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Systems\IsAlive\" />
-    <Folder Include="Systems\Shoot\" />
     <Folder Include="vendor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

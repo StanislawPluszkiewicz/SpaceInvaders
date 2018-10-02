@@ -6,9 +6,9 @@ using SpaceInvaders.Components;
 
 namespace SpaceInvaders.Entities
 {
-    abstract class Entity
+    abstract class GameObject
     {
-        protected Entity()
+        protected GameObject()
         {
             components = new Dictionary<Type, Component>();
             AddComponent(new TransformComponent(this));
@@ -35,7 +35,7 @@ namespace SpaceInvaders.Entities
             } catch (KeyNotFoundException e)
             {
                 // L'entite peut ne pas avoir un type de Component
-                return null;
+                throw e;
             }
         }
         #endregion Components

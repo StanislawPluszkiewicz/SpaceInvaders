@@ -2,7 +2,9 @@
 
 using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Scenes;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -20,8 +22,6 @@ namespace SpaceInvaders.Utils
         public static Brush BLACK_BRUSH = null;
         public static Font FONT = null;
         public static Pen PEN = null;
-        public static BufferedGraphics BUFFERED_GRAPHICS { get; set; }
-        public static Rectangle CLIP_RECTANGLE { get; set; }
 
 
         public static RenderForm instance = null;
@@ -30,13 +30,7 @@ namespace SpaceInvaders.Utils
             if (instance == null)
             {
                 instance = new RenderForm();
-
-                Entity joueur = new Player();
-                Engine.instance.AddEntity(joueur);
-
-
-                Entity ennemi = new Ennemi();
-                Engine.instance.AddEntity(ennemi);
+                new Scene_02_Game();
             }
             return instance;
         }
@@ -46,19 +40,28 @@ namespace SpaceInvaders.Utils
             BLACK_BRUSH = new SolidBrush(Color.Black);
             FONT = new Font("Times New Roman", 24, FontStyle.Bold, GraphicsUnit.Pixel);
             PEN = new Pen(Color.Black);
-            BUFFERED_GRAPHICS = null;
-            CLIP_RECTANGLE = this.ClientRectangle;
             InitializeComponent();
             game = Game.CreateGame(this.ClientSize);
             watch.Start();
             WorldClock.Start();
         }
 
+
+        internal bool ObjectIsOnScreen(RenderComponent renderComponent)
+        {
+            Vecteur2D topLeftCorner = new Vecteur2D(renderComponent.View.x, renderComponent.View.y);
+            Vecteur2D bottomRightCorner = new Vecteur2D(renderComponent.View.x + renderComponent.Image.Width, renderComponent.View.y + renderComponent.Image.Height);
+
+            return (bottomRightCorner.x > 0 && topLeftCorner.x < this.Width) && (bottomRightCorner.y > 0 && topLeftCorner.y < this.Height);
+        }
+
+
+
         // form event tick 
+        long lastTime = 0;
         private void WorldClock_Tick(object sender, EventArgs e)
         {
-
-            long lastTime = 0;
+            
             // get time with millisecond precision
             long nt = watch.ElapsedMilliseconds;
             // compute ellapsed time since last call to update
@@ -171,7 +174,7 @@ namespace SpaceInvaders.Utils
         /// <param name="e"></param>
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Game.Engine.keyPressed.Add(e.KeyCode);
+            Engine.instance.keyPressed.Add(e.KeyCode);
         }
         /// <summary>
         /// Key up event
@@ -180,7 +183,7 @@ namespace SpaceInvaders.Utils
         /// <param name="e"></param>
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
         {
-            Game.Engine.keyPressed.Remove(e.KeyCode);
+            Engine.instance.keyPressed.Remove(e.KeyCode);
         }
         private void GameForm_Load(object sender, EventArgs e)
         {

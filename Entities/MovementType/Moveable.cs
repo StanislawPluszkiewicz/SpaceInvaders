@@ -1,17 +1,15 @@
 ﻿using SpaceInvaders.Components;
-using SpaceInvaders.Entities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace SpaceInvaders
+namespace SpaceInvaders.Entities
 {
-    class Kynematic : Renderable
+    class Moveable : Renderable
     {
-
-        public Kynematic(Image image) : base(image)
+        public Moveable(Image image) : base(image)
         {
             AddComponent(new VelocityComponent(this));
         }

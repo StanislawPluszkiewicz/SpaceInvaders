@@ -26,11 +26,11 @@ namespace SpaceInvaders.Components
         public Vecteur2D Rotation { get; set; }
         public Vecteur2D LocalScale { get; set; }
 
-        public TransformComponent(Entity e) : base(e)
+        public TransformComponent(GameObject e) : base(e)
         {
             position = new Vecteur2D(0,0);
             Rotation = new Vecteur2D(0, 0);
-            LocalScale = new Vecteur2D(0, 0);
+            LocalScale = new Vecteur2D(1, 1);
         }
     }
 }

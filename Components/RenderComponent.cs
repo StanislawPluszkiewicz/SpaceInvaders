@@ -14,7 +14,7 @@ namespace SpaceInvaders.Components
         public Image Image { get; set; }
         public Vecteur2D View { get; set; }
 
-        public RenderComponent(Entity e, Image image) : base(e)
+        public RenderComponent(GameObject e, Image image) : base(e)
         {
             Image = image;
             View = new Vecteur2D(0, 0);

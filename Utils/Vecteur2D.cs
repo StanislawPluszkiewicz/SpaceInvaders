@@ -63,5 +63,6 @@ namespace SpaceInvaders.Utils
                 throw new DivideByZeroException("Divison par zero invalide!");
             return new Vecteur2D(v.x / k, v.y / k);
         }
+
     }
 }

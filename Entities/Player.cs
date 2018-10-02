@@ -8,19 +8,19 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Player : Kynematic
+    class Player : Moveable, IKynematic
     {
-        public Player() : base(Image.FromFile("../../Resources/ship1.png"))
+        public Player() : base(Image.FromFile("../../Resources/player.png"))
         {
-            TransformComponent transform = (TransformComponent)this.GetComponent(typeof(TransformComponent));
+            AddComponent(new MissileComponent(this, 1, 1));
+
+            TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
             transform.Position.x = RenderForm.instance.Size.Width / 2;
-            transform.Position.y = RenderForm.instance.Size.Width * 4 / 5;
+            transform.Position.y = RenderForm.instance.Size.Height * 4 / 5;
 
-
-            VelocityComponent velocity = (VelocityComponent)this.GetComponent(typeof(VelocityComponent));
-
-            velocity.Velocity.x = 1;
-            velocity.Velocity.y = 0;
+            VelocityComponent velocity = (VelocityComponent)GetComponent(typeof(VelocityComponent));
+            velocity.Velocity.x = 400;
+            velocity.Velocity.y = 400;
         }
     }
 }

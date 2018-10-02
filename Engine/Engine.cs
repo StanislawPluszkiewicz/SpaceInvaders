@@ -7,7 +7,10 @@ using System.Windows.Forms;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Systems;
 using SpaceInvaders.Systems.Move;
-using SpaceInvaders.Systems.MoveEnnemi;
+using SpaceInvaders.Systems.Move.MoveEnnemiLine;
+using SpaceInvaders.Systems.Move.MoveKynematicObject;
+using SpaceInvaders.Systems.OffScreenColider;
+using SpaceInvaders.Systems.Shoot;
 using SpaceInvaders.Utils;
 
 namespace SpaceInvaders
@@ -19,14 +22,20 @@ namespace SpaceInvaders
         /// </summary>
         public HashSet<Keys> keyPressed;
 
+        /// <summary>
+        /// Unique engine instance (singleton)
+        /// </summary>
         public static Engine instance = null;
 
+        /// <summary>
+        /// List of all systems
+        /// </summary>
         private List<ISystem> systems;
 
-        private List<Entity> entities;
+        private List<GameObject> entities;
 
         // Nodes
-        private Dictionary<Entity, List<Node>> nodesByEntity;
+        private Dictionary<GameObject, List<Node>> nodesByEntity;
         public Dictionary<Type, List<Node>> nodesByType;
         private IEnumerable<Type> nodeTypes;
 
@@ -34,13 +43,13 @@ namespace SpaceInvaders
         {
             keyPressed = new HashSet<Keys>();
             systems = new List<ISystem>();
-            entities = new List<Entity>();
-            nodesByEntity = new Dictionary<Entity, List<Node>>();
+            entities = new List<GameObject>();
+            nodesByEntity = new Dictionary<GameObject, List<Node>>();
             nodesByType = new Dictionary<Type, List<Node>>();
 
             // Get all child classes of a class
             // https://stackoverflow.com/questions/2742951/get-child-classes-from-base-class/11840189
-            nodeTypes = typeof(Systems.Node)
+            nodeTypes = typeof(Node)
                 .Assembly
                 .GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(Node)));
@@ -49,9 +58,12 @@ namespace SpaceInvaders
             {
                 nodesByType[type] = new List<Node>();
             }
-            
-            AddSystem(new MoveSystem());
-            AddSystem(new MoveEnnemiSystem());
+
+            AddSystem(new MoveKynematicSystem());
+            AddSystem(new MoveDynamicSystem());
+            AddSystem(new MoveEnnemiLineSystem());
+            AddSystem(new OffScreenColiderSystem());
+            AddSystem(new ShootSystem());
 
         }
 
@@ -64,7 +76,7 @@ namespace SpaceInvaders
             return instance;
         }
 
-        public void AddEntity(Entity entity)
+        public void AddEntity(GameObject entity)
         {
             // Made with a lot of help from stack overflow
 
@@ -72,18 +84,18 @@ namespace SpaceInvaders
             nodesByEntity[entity] = new List<Node>();
             foreach(Type NodeType in nodeTypes)
             {
-                Entity[] currentEntityList = { entity };
+                GameObject[] currentEntityList = { entity };
                 if ((bool) NodeType.GetMethod("HasToBeCreated").Invoke(null, currentEntityList))
                 {
-                    Type[] constructorParameterTypes = { typeof(Entity) };
-                    Node node = (Node) NodeType.GetConstructor(constructorParameterTypes).Invoke(currentEntityList);
+                    Type[] constructorParameterTypes = { typeof(GameObject) };
+                    Node node = NodeType.GetConstructor(constructorParameterTypes).Invoke(currentEntityList) as Node;
                     nodesByEntity[entity].Add(node);
                     nodesByType[NodeType].Add(node);
                 }
             }
         }
 
-        public void RemoveEntity(Entity entity)
+        public void RemoveEntity(GameObject entity)
         {
             if (entities.Contains(entity))
             {
@@ -93,8 +105,22 @@ namespace SpaceInvaders
                     nodesByType[node.GetType()].Remove(node);
                 }
                 nodesByEntity.Remove(entity);
-
             }
+        }
+
+        internal GameObject GetEntityByNode(Node n)
+        {
+            foreach (KeyValuePair<GameObject, List<Node>> keyValuePair in nodesByEntity)
+            {
+                foreach (Node node in keyValuePair.Value)
+                {
+                    if (n == node)
+                    {
+                        return keyValuePair.Key;
+                    }
+                }
+            }
+            throw new Exception("Couldn't get the entity associated to a node");
         }
 
         private void AddSystem(ISystem system)
@@ -125,9 +151,11 @@ namespace SpaceInvaders
 
         public void Render(Graphics g)
         {
-            foreach(Entity e in entities)
+            foreach(GameObject e in entities)
             {
-                ((Renderable)e).Render(g);
+                var entity = e as Renderable;
+                if (entity != null)
+                    ((Renderable)e).Render(g);
             }
         }
     }

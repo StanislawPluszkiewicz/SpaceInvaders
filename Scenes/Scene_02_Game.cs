@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SpaceInvaders.Scenes
 {
-    class Scene_02_Game
+    class Scene_02_Game : Scene
     {
         public Scene_02_Game()
         {
@@ -30,8 +30,8 @@ namespace SpaceInvaders.Scenes
                     Engine.instance.AddEntity(ennemi);
                     TransformComponent positionComponent = (TransformComponent)ennemi.GetComponent(typeof(TransformComponent));
                     RenderComponent renderComponent = (RenderComponent)ennemi.GetComponent(typeof(RenderComponent));
-                    float height = (RenderForm.instance.Height * .1f) + y * (renderComponent.Image.Height + 10);
-                    float width = x * (renderComponent.Image.Width + 10);
+                    float height = (RenderForm.instance.Height * .1f) + y * (renderComponent.Image.Height + 15);
+                    float width = x * (renderComponent.Image.Width + 20);
                     positionComponent.Position = new Vecteur2D(width, height);
                 }
                 EnnemiLine ennemiLine = new EnnemiLine(ennemiLineList);

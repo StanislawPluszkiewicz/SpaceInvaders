@@ -14,9 +14,33 @@ namespace SpaceInvaders.Components
         public Image Image { get; set; }
         public Vecteur2D View { get; set; }
 
+        #region trail
+
+        public bool HasTrail = false;
+        public Image TrailImage{ get; set; }
+        public Vecteur2D TrailOffset { get; set; }
+        public List<Vecteur2D> TrailPositions { get; set; }
+        private int TrailSize = 200;
+        public void SetTrail(Image trailImage, Vecteur2D trailOffset)
+        {
+            TrailOffset = trailOffset;
+            TrailImage = trailImage;
+            HasTrail = true;
+        }
+
+        internal void UpdateTrail(Vecteur2D position)
+        {
+            if (TrailPositions.Count > TrailSize)
+            {
+                TrailPositions.RemoveAt(TrailSize);
+            }
+            TrailPositions.Insert(0, position + TrailOffset + new Vecteur2D(0, + Image.Size.Height / 2));
+        }
+        #endregion trail
         public RenderComponent(GameObject e, Image image) : base(e)
         {
             Image = image;
+            TrailPositions = new List<Vecteur2D>();
             View = new Vecteur2D(0, 0);
         }
     }

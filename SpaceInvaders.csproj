@@ -46,22 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\MissileComponent.cs" />
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Entities\Collidable.cs" />
+    <Compile Include="Entities\Collision\ICollidable.cs" />
     <Compile Include="Entities\Ennemies\Ennemi.cs" />
     <Compile Include="Entities\Ennemies\EnnemiBloc.cs" />
     <Compile Include="Entities\Ennemies\EnnemiLine.cs" />
+    <Compile Include="Entities\Missiles\EnnemiMissile.cs" />
+    <Compile Include="Entities\Missiles\PlayerMissile.cs" />
     <Compile Include="Entities\MovementType\IDynamic.cs" />
     <Compile Include="Entities\MovementType\IKynematic.cs" />
-    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\GameObject.cs" />
     <Compile Include="Entities\Missiles\Missile.cs" />
-    <Compile Include="Entities\MovementType\Moveable.cs" />
+    <Compile Include="Entities\Moveable.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Renderable.cs" />
     <Compile Include="Entities\MovementType\IStatic.cs" />
+    <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\Scene_02_Game.cs" />
+    <Compile Include="Systems\Collision\CollisionNode.cs" />
+    <Compile Include="Systems\Collision\CollisionSystem.cs" />
     <Compile Include="Systems\Move\MoveEnnemiLine\MoveEnnemiLineNode.cs" />
     <Compile Include="Systems\Move\MoveEnnemiLine\MoveEnnemiLineSystem.cs" />
     <Compile Include="Systems\Move\MoveDynamic\MoveDynamicNode.cs" />

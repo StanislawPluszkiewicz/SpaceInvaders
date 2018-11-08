@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Systems;
+using SpaceInvaders.Systems.Collision;
 using SpaceInvaders.Systems.Move;
 using SpaceInvaders.Systems.Move.MoveEnnemiLine;
 using SpaceInvaders.Systems.Move.MoveKynematicObject;
@@ -64,6 +65,8 @@ namespace SpaceInvaders
             AddSystem(new MoveEnnemiLineSystem());
             AddSystem(new OffScreenColiderSystem());
             AddSystem(new ShootSystem());
+            AddSystem(new CollisionSystem());
+            
 
         }
 

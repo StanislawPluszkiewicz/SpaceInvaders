@@ -19,6 +19,12 @@ namespace SpaceInvaders.Systems.Move.MoveKynematicObject
             foreach (MoveDynamicNode node in moveNodes)
             {
                 node.TransformComponent.Position += time * node.VelocityComponent.Velocity;
+                if (node.RenderComponent.HasTrail)
+                {
+                    node.RenderComponent.UpdateTrail(node.TransformComponent.Position);
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer("../../Resources/anim/missile_sound.wav");
+                    player.Play();
+                }
             }
         }
     }

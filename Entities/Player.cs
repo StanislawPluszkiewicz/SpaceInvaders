@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.Components;
+using SpaceInvaders.Systems.Collision;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,11 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Player : Moveable, IKynematic
+    class Player : Collidable, IKynematic
     {
-        public Player() : base(Image.FromFile("../../Resources/player.png"))
+        public Player() : base(Image.FromFile("../../Resources/player.png"), CollisionSystem.Tag.PLAYER)
         {
-            AddComponent(new MissileComponent(this, 1, 1));
-
+            AddComponent(new MissileComponent(this, 1, 0.2));
             TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
             transform.Position.x = RenderForm.instance.Size.Width / 2;
             transform.Position.y = RenderForm.instance.Size.Height * 4 / 5;

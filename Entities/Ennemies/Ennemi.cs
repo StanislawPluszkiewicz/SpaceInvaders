@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.Components;
+using SpaceInvaders.Systems.Collision;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,10 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Ennemi : Moveable, IDynamic
+    class Ennemi : Collidable, IDynamic
     {
-        public Ennemi() : base(Image.FromFile("../../Resources/pacman.png"))
+        public Ennemi() : base(Image.FromFile("../../Resources/ship1.png"), CollisionSystem.Tag.ENNEMI)
         {
-            //TransformComponent transform = (TransformComponent)this.GetComponent(typeof(TransformComponent));
-            //RenderForm instance = RenderForm.instance;
-            //transform.Position.x = RenderForm.instance.Size.Width * 1 / 3;
-            //transform.Position.y = RenderForm.instance.Size.Width * 2 / 5;
-
             VelocityComponent velocity = (VelocityComponent)this.GetComponent(typeof(VelocityComponent));
 
             velocity.Velocity.x = 50;

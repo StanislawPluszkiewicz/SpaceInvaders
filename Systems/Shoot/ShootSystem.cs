@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Entities.Missiles;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,14 @@ namespace SpaceInvaders.Systems.Shoot
                 {
                     node.MissileComponent.TimeSinceLastShoot = 0;
                     GameObject e = Engine.instance.GetEntityByNode(node);
-                    Engine.instance.AddEntity(new Missile(e));
+                    if (e is Player)
+                    {
+                        Engine.instance.AddEntity(new PlayerMissile(e));
+                    }
+                    else if (e is Ennemi)
+                    {
+                        Engine.instance.AddEntity(new EnnemiMissile(e));
+                    }
                 }
             }
         }

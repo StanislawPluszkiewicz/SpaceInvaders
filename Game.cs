@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Components;
+using SpaceInvaders.Scenes;
 
 namespace SpaceInvaders
 {
@@ -29,8 +30,7 @@ namespace SpaceInvaders
         /// <summary>
         /// Singleton for easy access
         /// </summary>
-        public static Game game { get; private set; }
-        public static Engine Engine { get; private set; }
+        public static Game instance { get; private set; }
 
         #region constructors (singleton)
         /// <summary>
@@ -41,9 +41,9 @@ namespace SpaceInvaders
         /// <returns></returns>
         public static Game CreateGame(Size gameSize)
         {
-            if (game == null)
-                game = new Game(gameSize);
-            return game;
+            if (instance == null)
+                instance = new Game(gameSize);
+            return instance;
         }
 
         /// <summary>
@@ -53,41 +53,14 @@ namespace SpaceInvaders
         private Game(Size gameSize)
         {
             this.gameSize = gameSize;
-            Engine = Engine.CreateEngine();
-        }
-
-        public void update(double deltaTime)
-        {
-            Engine.Update(deltaTime);
+            Engine.CreateEngine();
         }
 
         #endregion
-
-        #region methods
-
-        /// <summary>
-        /// Force a given key to be ignored in following updates until the user
-        /// explicitily retype it or the system autofires it again.
-        /// </summary>
-        /// <param name="key">key to ignore</param>
-        public void ReleaseKey(Keys key)
+        public void Update(double deltaTime)
         {
-            keyPressed.Remove(key);
+            Engine.instance.Update(deltaTime);
         }
 
-
-        ///// <summary>
-        ///// Update game
-        ///// </summary>
-        //public void Update(double deltaT)
-        //{
-        //    // add new game objects
-        //    gameObjects.UnionWith(pendingNewGameObjects);
-        //    pendingNewGameObjects.Clear();
-
-        //    // remove dead objects
-        //    gameObjects.RemoveWhere(gameObject => !gameObject.IsAlive());
-        //}
-        #endregion
     }
 }

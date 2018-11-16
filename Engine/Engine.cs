@@ -33,10 +33,10 @@ namespace SpaceInvaders
         /// </summary>
         private List<ISystem> systems;
 
-        private List<GameObject> entities;
+        private List<Entity> entities;
 
         // Nodes
-        private Dictionary<GameObject, List<Node>> nodesByEntity;
+        private Dictionary<Entity, List<Node>> nodesByEntity;
         public Dictionary<Type, List<Node>> nodesByType;
         private IEnumerable<Type> nodeTypes;
 
@@ -44,8 +44,8 @@ namespace SpaceInvaders
         {
             keyPressed = new HashSet<Keys>();
             systems = new List<ISystem>();
-            entities = new List<GameObject>();
-            nodesByEntity = new Dictionary<GameObject, List<Node>>();
+            entities = new List<Entity>();
+            nodesByEntity = new Dictionary<Entity, List<Node>>();
             nodesByType = new Dictionary<Type, List<Node>>();
 
             // Get all child classes of a class
@@ -60,14 +60,17 @@ namespace SpaceInvaders
                 nodesByType[type] = new List<Node>();
             }
 
+            AddAllSystems();
+        }
+
+        private void AddAllSystems()
+        {
             AddSystem(new MoveKynematicSystem());
             AddSystem(new MoveDynamicSystem());
             AddSystem(new MoveEnnemiLineSystem());
             AddSystem(new OffScreenColiderSystem());
             AddSystem(new ShootSystem());
             AddSystem(new CollisionSystem());
-            
-
         }
 
         public static Engine CreateEngine()
@@ -79,7 +82,7 @@ namespace SpaceInvaders
             return instance;
         }
 
-        public void AddEntity(GameObject entity)
+        public void AddEntity(Entity entity)
         {
             // Made with a lot of help from stack overflow
 
@@ -87,10 +90,10 @@ namespace SpaceInvaders
             nodesByEntity[entity] = new List<Node>();
             foreach(Type NodeType in nodeTypes)
             {
-                GameObject[] currentEntityList = { entity };
+                Entity[] currentEntityList = { entity };
                 if ((bool) NodeType.GetMethod("HasToBeCreated").Invoke(null, currentEntityList))
                 {
-                    Type[] constructorParameterTypes = { typeof(GameObject) };
+                    Type[] constructorParameterTypes = { typeof(Entity) };
                     Node node = NodeType.GetConstructor(constructorParameterTypes).Invoke(currentEntityList) as Node;
                     nodesByEntity[entity].Add(node);
                     nodesByType[NodeType].Add(node);
@@ -98,7 +101,7 @@ namespace SpaceInvaders
             }
         }
 
-        public void RemoveEntity(GameObject entity)
+        public void RemoveEntity(Entity entity)
         {
             if (entities.Contains(entity))
             {
@@ -111,9 +114,9 @@ namespace SpaceInvaders
             }
         }
 
-        internal GameObject GetEntityByNode(Node n)
+        internal Entity GetEntityByNode(Node n)
         {
-            foreach (KeyValuePair<GameObject, List<Node>> keyValuePair in nodesByEntity)
+            foreach (KeyValuePair<Entity, List<Node>> keyValuePair in nodesByEntity)
             {
                 foreach (Node node in keyValuePair.Value)
                 {
@@ -154,7 +157,7 @@ namespace SpaceInvaders
 
         public void Render(Graphics g)
         {
-            foreach(GameObject e in entities)
+            foreach(Entity e in entities)
             {
                 var entity = e as Renderable;
                 if (entity != null)

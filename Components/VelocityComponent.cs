@@ -13,7 +13,7 @@ namespace SpaceInvaders.Components
         public Vecteur2D Acceleration { get; set; }
         public Vecteur2D AngularVelocity { get; set; }
 
-        public VelocityComponent(GameObject e) : base(e)
+        public VelocityComponent(Entity e) : base(e)
         {
             Velocity = new Vecteur2D(1.5,1.5);
             Acceleration = new Vecteur2D(1, 1);

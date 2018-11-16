@@ -10,28 +10,15 @@ namespace SpaceInvaders.Components
 {
     class CollisionComponent : Component
     {
-        public CollisionComponent(GameObject e, CollisionSystem.Tag tag) : base(e)
+        public CollisionSystem.Tag Tag { get; set; }
+        public Hitbox Hitbox { get; set; }
+        public delegate void OnCollisionEnter(Entity other);
+        public OnCollisionEnter onCollisionEnter;
+        public CollisionComponent(Entity e, CollisionSystem.Tag tag) : base(e)
         {
             Tag = tag;
-        }
-
-        public CollisionSystem.Tag Tag { get; set; } // Collision Tag
-        public Vecteur2D TopLeft
-        {
-            get
-            {
-                RenderComponent renderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
-                return renderComponent.View;
-            }
-        }
-
-        public Vecteur2D BottomRight
-        {
-            get
-            {
-                RenderComponent renderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
-                return new Vecteur2D(renderComponent.View.x + renderComponent.Image.Width, renderComponent.View.x + renderComponent.Image.Height);
-            }
+            RenderComponent renderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
+            Hitbox = new Hitbox(-1, -1, -1, -1);
         }
 
     }

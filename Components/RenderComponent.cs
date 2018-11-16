@@ -37,7 +37,7 @@ namespace SpaceInvaders.Components
             TrailPositions.Insert(0, position + TrailOffset + new Vecteur2D(0, + Image.Size.Height / 2));
         }
         #endregion trail
-        public RenderComponent(GameObject e, Image image) : base(e)
+        public RenderComponent(Entity e, Image image) : base(e)
         {
             Image = image;
             TrailPositions = new List<Vecteur2D>();

@@ -6,9 +6,9 @@ using SpaceInvaders.Components;
 
 namespace SpaceInvaders.Entities
 {
-    abstract class GameObject
+    abstract class Entity
     {
-        protected GameObject()
+        protected Entity()
         {
             components = new Dictionary<Type, Component>();
             AddComponent(new TransformComponent(this));

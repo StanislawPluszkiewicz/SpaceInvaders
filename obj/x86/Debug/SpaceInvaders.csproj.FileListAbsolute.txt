@@ -35,3 +35,12 @@ C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.csproj
 C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
 C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.exe
 C:\Users\pluszkis\Downloads\SpaceInvaders-Dev\obj\x86\Debug\SpaceInvaders.pdb
+U:\Documents\programmation orientée objet\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+U:\Documents\programmation orientée objet\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.Properties.Resources.resources
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.Utils.RenderForm.resources
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.GenerateResource.cache
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.exe
+U:\Documents\programmation orientée objet\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb

@@ -11,13 +11,13 @@ namespace SpaceInvaders.Systems.Move
         public VelocityComponent VelocityComponent { get; set; }
         public RenderComponent RenderComponent { get; set; }
 
-        public MoveKynematicNode(GameObject entity)
+        public MoveKynematicNode(Entity entity)
         {
             TransformComponent = entity.GetComponent(typeof(TransformComponent)) as TransformComponent;
             VelocityComponent  = entity.GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             RenderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
         }
 
-        public new static bool HasToBeCreated(GameObject entity) => (entity.GetType().GetInterfaces().Contains(typeof(IKynematic)));
+        public new static bool HasToBeCreated(Entity entity) => (entity.GetType().GetInterfaces().Contains(typeof(IKynematic)));
     }
 }

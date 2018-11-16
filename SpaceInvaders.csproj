@@ -60,7 +60,7 @@
     <Compile Include="Entities\Missiles\PlayerMissile.cs" />
     <Compile Include="Entities\MovementType\IDynamic.cs" />
     <Compile Include="Entities\MovementType\IKynematic.cs" />
-    <Compile Include="Entities\GameObject.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Missiles\Missile.cs" />
     <Compile Include="Entities\Moveable.cs" />
     <Compile Include="Entities\Player.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Systems\OffScreenColider\OffScreenColiderSystem.cs" />
     <Compile Include="Systems\Shoot\ShootNode.cs" />
     <Compile Include="Systems\Shoot\ShootSystem.cs" />
+    <Compile Include="Utils\Hitbox.cs" />
     <Compile Include="Utils\Maths.cs" />
     <Compile Include="Utils\RenderForm.cs">
       <SubType>Form</SubType>

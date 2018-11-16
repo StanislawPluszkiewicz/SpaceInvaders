@@ -13,6 +13,12 @@ namespace SpaceInvaders.Systems.Shoot
     class ShootSystem : ISystem
     {
         List<Node> nodes;
+        Random random;
+
+        public ShootSystem()
+        {
+            random = new Random();
+        }
 
         public void Update(double time)
         {
@@ -26,19 +32,33 @@ namespace SpaceInvaders.Systems.Shoot
             foreach (ShootNode node in nodes)
             {
                 node.MissileComponent.TimeSinceLastShoot += time;
-                if (shoot && node.MissileComponent.TimeSinceLastShoot >= node.MissileComponent.FireRate)
+                    
+                Entity e = Engine.instance.GetEntityByNode(node);
+                if (node.MissileComponent.TimeSinceLastShoot >= node.MissileComponent.FireRate)
                 {
+                    bool ennemiShoot = this.random.Next(0, 1000) < node.MissileComponent.ShootProbability;
                     node.MissileComponent.TimeSinceLastShoot = 0;
-                    GameObject e = Engine.instance.GetEntityByNode(node);
-                    if (e is Player)
+                    if (e is Player && shoot)
                     {
                         Engine.instance.AddEntity(new PlayerMissile(e));
                     }
-                    else if (e is Ennemi)
+                    if (e is Ennemi)
                     {
-                        Engine.instance.AddEntity(new EnnemiMissile(e));
+                        if (ennemiShoot)
+                        {
+                            Engine.instance.AddEntity(new EnnemiMissile(e));
+                            node.MissileComponent.ShootProbability = node.MissileComponent.BaseShootProbability;
+                        }
+                        else
+                        {
+                            node.MissileComponent.ShootProbability += node.MissileComponent.ShootProbabilityIncrementation;
+                        }
                     }
+                    
+
                 }
+
+
             }
         }
     }

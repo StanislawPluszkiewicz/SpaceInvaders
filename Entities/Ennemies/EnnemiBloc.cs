@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class EnnemiBloc : GameObject
+    class EnnemiBloc : Entity
     {
         public List<EnnemiLine> EnnemiBlocList { get; private set; }
         public EnnemiBloc(List<EnnemiLine> ennemiBlocList)

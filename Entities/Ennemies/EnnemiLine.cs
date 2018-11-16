@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class EnnemiLine : GameObject
+    class EnnemiLine : Entity
     {
         public List<Ennemi> EnnemiLineList { get; private set; }
 

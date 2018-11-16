@@ -11,11 +11,11 @@ namespace SpaceInvaders.Systems.Move.MoveEnnemiLine
     class MoveEnnemiLineNode : Node
     {
         public List<Node> MoveEnnemiNodes { get; set; }
-        public MoveEnnemiLineNode(GameObject entity)
+        public MoveEnnemiLineNode(Entity entity)
         {
             MoveEnnemiNodes = Engine.instance.nodesByType[typeof(MoveDynamicNode)];
         }
 
-        public new static bool HasToBeCreated(GameObject entity) => entity.GetType() == typeof(EnnemiLine);
+        public new static bool HasToBeCreated(Entity entity) => entity.GetType() == typeof(EnnemiLine);
     }
 }

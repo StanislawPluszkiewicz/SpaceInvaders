@@ -20,9 +20,9 @@ namespace SpaceInvaders.Systems.Move.MoveEnnemiLine
 
             foreach (MoveEnnemiLineNode lineNode in MoveKynematicObjectNodes)
             {
+                if (lineNode.MoveEnnemiNodes.Count == 0) { break; }
                 MoveDynamicNode mostLeftNode = (MoveDynamicNode)lineNode.MoveEnnemiNodes.First();
                 MoveDynamicNode mostRightNode = (MoveDynamicNode)lineNode.MoveEnnemiNodes.First();
-
                 foreach(MoveDynamicNode node in lineNode.MoveEnnemiNodes)
                 {
                     if (mostRightNode.TransformComponent.Position.x < node.TransformComponent.Position.x)

@@ -11,11 +11,11 @@ namespace SpaceInvaders.Systems.Shoot
     {
         public MissileComponent MissileComponent { get; set; }
 
-        public ShootNode(GameObject entity)
+        public ShootNode(Entity entity)
         {
             MissileComponent = entity.GetComponent(typeof(MissileComponent)) as MissileComponent;
         }
 
-        public new static bool HasToBeCreated(GameObject entity) => entity.GetType() == typeof(Player);
+        public new static bool HasToBeCreated(Entity entity) => entity.GetType() == typeof(Ennemi) || entity.GetType() == typeof(Player);
     }
 }

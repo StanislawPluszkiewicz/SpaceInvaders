@@ -11,8 +11,8 @@ namespace SpaceInvaders.Components
     // Contains only data relevant for an Entity
     // </summary>
     class Component {
-        protected GameObject entity;
-        public Component(GameObject e)
+        public Entity entity;
+        public Component(Entity e)
         {
             entity = e;
         }

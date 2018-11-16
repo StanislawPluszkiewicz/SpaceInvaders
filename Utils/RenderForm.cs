@@ -108,7 +108,6 @@ namespace SpaceInvaders.Utils
 
         private void InitializeComponent()
         {
-
             this.components = new System.ComponentModel.Container();
             this.WorldClock = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -118,16 +117,18 @@ namespace SpaceInvaders.Utils
             this.WorldClock.Interval = 30;
             this.WorldClock.Tick += new System.EventHandler(this.WorldClock_Tick);
             // 
-            // GameForm
+            // RenderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 745);
+            this.ClientSize = new System.Drawing.Size(605, 605);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
-            this.Name = "GameForm";
+            this.Name = "RenderForm";
             this.Text = "Space Invaders.";
+            this.Load += new System.EventHandler(this.RenderForm_Load_1);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameForm_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
@@ -184,5 +185,10 @@ namespace SpaceInvaders.Utils
 
 
         #endregion
+
+        private void RenderForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

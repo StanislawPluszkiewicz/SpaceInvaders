@@ -10,16 +10,18 @@ namespace SpaceInvaders.Systems.Collision
 {
     class CollisionNode : Node
     {
-        RenderComponent RenderComponent { get; set; }
-        TransformComponent TransformComponent { get; set; }
+        public RenderComponent RenderComponent { get; set; }
+        public TransformComponent TransformComponent { get; set; }
+        public CollisionComponent CollisionComponent { get; set; }
 
-        public CollisionNode(GameObject entity)
+        public CollisionNode(Entity entity)
         {
             RenderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
             TransformComponent = entity.GetComponent(typeof(TransformComponent)) as TransformComponent;
+            CollisionComponent = entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
         }
 
-        public new static bool HasToBeCreated(GameObject entity) => entity.GetType().GetInterfaces().Contains(typeof(ICollidable));
+        public new static bool HasToBeCreated(Entity entity) => entity.GetType().GetInterfaces().Contains(typeof(ICollidable));
 
     }
 }

@@ -13,10 +13,19 @@ namespace SpaceInvaders.Entities
     {
         public Ennemi() : base(Image.FromFile("../../Resources/ship1.png"), CollisionSystem.Tag.ENNEMI)
         {
-            VelocityComponent velocity = (VelocityComponent)this.GetComponent(typeof(VelocityComponent));
+            AddComponent(new MissileComponent(this, 1, 0.2));
 
+            VelocityComponent velocity = (VelocityComponent)this.GetComponent(typeof(VelocityComponent));
             velocity.Velocity.x = 50;
             velocity.Velocity.y = 0;
+
+
+            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            collisionComponent.onCollisionEnter = (Entity other) =>
+            {
+                Engine.instance.RemoveEntity(this);
+                Engine.instance.RemoveEntity(other);
+            };
 
         }
     }

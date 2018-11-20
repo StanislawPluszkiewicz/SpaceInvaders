@@ -12,8 +12,8 @@ namespace SpaceInvaders.Scenes
     {
         public Scene_02_Game()
         {
+            Engine.instance.AddEntity(new MenuShortcutsManager());
             Engine.instance.AddEntity(new Player());
-
             SpawnEnnemiWave();
         }
 

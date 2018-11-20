@@ -18,32 +18,22 @@ namespace SpaceInvaders
 {
     class Engine
     {
-        /// <summary>
-        /// State of the keyboard
-        /// </summary>
         public HashSet<Keys> keyPressed;
-
-        /// <summary>
-        /// Unique engine instance (singleton)
-        /// </summary>
         public static Engine instance = null;
-
-        /// <summary>
-        /// List of all systems
-        /// </summary>
-        private List<ISystem> systems;
-
-        private List<Entity> entities;
-
-        // Nodes
-        private Dictionary<Entity, List<Node>> nodesByEntity;
+        public bool Pause = false;
         public Dictionary<Type, List<Node>> nodesByType;
+        
+        private List<ISystem> gameSystems;
+        private List<ISystem> applicationSystems;
+        private List<Entity> entities;
+        private Dictionary<Entity, List<Node>> nodesByEntity;
         private IEnumerable<Type> nodeTypes;
 
         private Engine()
         {
             keyPressed = new HashSet<Keys>();
-            systems = new List<ISystem>();
+            gameSystems = new List<ISystem>();
+            applicationSystems = new List<ISystem>();
             entities = new List<Entity>();
             nodesByEntity = new Dictionary<Entity, List<Node>>();
             nodesByType = new Dictionary<Type, List<Node>>();
@@ -65,12 +55,13 @@ namespace SpaceInvaders
 
         private void AddAllSystems()
         {
-            AddSystem(new MoveKynematicSystem());
-            AddSystem(new MoveDynamicSystem());
-            AddSystem(new MoveEnnemiLineSystem());
-            AddSystem(new OffScreenColiderSystem());
-            AddSystem(new ShootSystem());
-            AddSystem(new CollisionSystem());
+            AddGameSystem(new MoveKynematicSystem());
+            AddGameSystem(new MoveDynamicSystem());
+            AddGameSystem(new MoveEnnemiLineSystem());
+            AddGameSystem(new OffScreenColiderSystem());
+            AddGameSystem(new ShootSystem());
+            AddGameSystem(new CollisionSystem());
+            AddApplicationSystem(new MenuShortcutsSystem());
         }
 
         public static Engine CreateEngine()
@@ -129,16 +120,16 @@ namespace SpaceInvaders
             throw new Exception("Couldn't get the entity associated to a node");
         }
 
-        private void AddSystem(ISystem system)
+        private void AddGameSystem(ISystem system)
         {
-            systems.Add(system);
+            gameSystems.Add(system);
         }
 
-        private void RemoveSystem(ISystem system)
+        private void RemoveGameSystem(ISystem system)
         {
             try
             {
-                systems.Remove(system);
+                gameSystems.Remove(system);
             }
             catch (KeyNotFoundException e)
             {
@@ -147,9 +138,37 @@ namespace SpaceInvaders
             }
         }
 
+        private void AddApplicationSystem(ISystem system)
+        {
+            applicationSystems.Add(system);
+        }
+
+        private void RemoveApplicationSystem(ISystem system)
+        {
+            try
+            {
+                applicationSystems.Remove(system);
+            }
+            catch (KeyNotFoundException e)
+            {
+                Console.WriteLine("SystemManager has no system " + system.GetType().Name);
+                throw new KeyNotFoundException(e.Message);
+            }
+        }
+
+
         public void Update(double deltaTime)
         {
-            foreach (ISystem system in systems)
+            if (!Pause)
+            {
+                foreach (ISystem system in gameSystems)
+                {
+                    system.Update(deltaTime);
+                }
+
+            }
+
+            foreach (ISystem system in applicationSystems)
             {
                 system.Update(deltaTime);
             }

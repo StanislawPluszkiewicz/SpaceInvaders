@@ -56,6 +56,7 @@
     <Compile Include="Entities\Ennemies\Ennemi.cs" />
     <Compile Include="Entities\Ennemies\EnnemiBloc.cs" />
     <Compile Include="Entities\Ennemies\EnnemiLine.cs" />
+    <Compile Include="Entities\MenuShortcutsManager.cs" />
     <Compile Include="Entities\Missiles\EnnemiMissile.cs" />
     <Compile Include="Entities\Missiles\PlayerMissile.cs" />
     <Compile Include="Entities\MovementType\IDynamic.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Scenes\Scene_02_Game.cs" />
     <Compile Include="Systems\Collision\CollisionNode.cs" />
     <Compile Include="Systems\Collision\CollisionSystem.cs" />
+    <Compile Include="Systems\MenuShortcuts\MenuShortcutsNode.cs" />
+    <Compile Include="Systems\MenuShortcuts\MenuShortcutsSystem.cs" />
     <Compile Include="Systems\Move\MoveEnnemiLine\MoveEnnemiLineNode.cs" />
     <Compile Include="Systems\Move\MoveEnnemiLine\MoveEnnemiLineSystem.cs" />
     <Compile Include="Systems\Move\MoveDynamic\MoveDynamicNode.cs" />
@@ -82,8 +85,8 @@
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Systems\OffScreenColider\OffScreenColiderNode.cs" />
-    <Compile Include="Systems\OffScreenColider\OffScreenColiderSystem.cs" />
+    <Compile Include="Systems\Collision\OffScreenColider\OffScreenColiderNode.cs" />
+    <Compile Include="Systems\Collision\OffScreenColider\OffScreenColiderSystem.cs" />
     <Compile Include="Systems\Shoot\ShootNode.cs" />
     <Compile Include="Systems\Shoot\ShootSystem.cs" />
     <Compile Include="Utils\Hitbox.cs" />

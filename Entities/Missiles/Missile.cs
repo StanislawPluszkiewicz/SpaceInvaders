@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using static SpaceInvaders.Components.CollisionComponent;
 
 namespace SpaceInvaders.Entities
 {
     abstract class Missile : Collidable, IDynamic
     {
-        public Missile(Entity e, Image image, CollisionSystem.Tag collisionTag, Image imageTrail = null, Vecteur2D trailOffset = null) : base(image, collisionTag)
+        public Missile(Entity e, Image image, CollisionTag collisionTag, Image imageTrail = null, Vecteur2D trailOffset = null) : base(image, collisionTag)
         {
             RenderComponent renderComponent = GetComponent(typeof(RenderComponent)) as RenderComponent;
             if (imageTrail != null && trailOffset != null)
@@ -28,11 +29,6 @@ namespace SpaceInvaders.Entities
             velocity.Acceleration.y = 1.2;
 
             CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
-            collisionComponent.onCollisionEnter = (Entity other) =>
-            {
-                Engine.instance.RemoveEntity(this);
-                Engine.instance.RemoveEntity(other);
-            };
         }
     }
 }

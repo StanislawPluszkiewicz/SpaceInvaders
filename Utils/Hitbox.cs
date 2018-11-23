@@ -7,11 +7,12 @@ namespace SpaceInvaders.Utils
 {
     public struct Vecteur4
     {
-        public double top;
-        public double bottom;
-        public double left;
-        public double right;
+        public double Top { get; set; }
+        public double Bottom { get; set; }
+        public double Left { get; set; }
+        public double Right { get; set; }
     }
+
 
     class Hitbox
     {
@@ -27,16 +28,16 @@ namespace SpaceInvaders.Utils
         {
 
             return !(
-                ((box.left > other.box.right) || (box.right <  other.box.left)) || 
-                ((box.top > other.box.bottom) || (box.bottom < other.box.top)));
+                ((box.Left > other.box.Right) || (box.Right <  other.box.Left)) || 
+                ((box.Top > other.box.Bottom) || (box.Bottom < other.box.Top)));
         }
 
         public void Update(double top, double bottom, double left, double right)
         {
-            this.box.top = top;
-            this.box.bottom = bottom;
-            this.box.left = left;
-            this.box.right = right;
+            this.box.Top = top;
+            this.box.Bottom = bottom;
+            this.box.Left = left;
+            this.box.Right = right;
         }
     }
 }

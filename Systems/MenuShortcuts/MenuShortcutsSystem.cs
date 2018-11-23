@@ -21,12 +21,14 @@ namespace SpaceInvaders.Systems.Collision
             // Pause
             if (Engine.instance.keyPressed.Contains(Keys.P))
             {
-                Engine.instance.Pause = false;
+                Engine.instance.Pause = !Engine.instance.Pause;
+                Engine.instance.keyPressed.Remove(Keys.P);
             }
 
             if (Engine.instance.keyPressed.Contains(Keys.Escape))
             {
-                Engine.instance.Pause = true;
+                Engine.instance.Pause = !Engine.instance.Pause;
+                Engine.instance.keyPressed.Remove(Keys.Escape);
             }
         }
     }

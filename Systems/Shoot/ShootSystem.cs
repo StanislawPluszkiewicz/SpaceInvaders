@@ -36,15 +36,14 @@ namespace SpaceInvaders.Systems.Shoot
                 Entity e = Engine.instance.GetEntityByNode(node);
                 if (node.MissileComponent.TimeSinceLastShoot >= node.MissileComponent.FireRate)
                 {
-                    bool ennemiShoot = this.random.Next(0, 1000) < node.MissileComponent.ShootProbability;
                     node.MissileComponent.TimeSinceLastShoot = 0;
                     if (e is Player && shoot)
                     {
                         Engine.instance.AddEntity(new PlayerMissile(e));
                     }
-                    if (e is Ennemi)
+                    else if (e is Ennemi)
                     {
-                        if (ennemiShoot)
+                        if (random.Next(0, 200) < node.MissileComponent.ShootProbability)
                         {
                             Engine.instance.AddEntity(new EnnemiMissile(e));
                             node.MissileComponent.ShootProbability = node.MissileComponent.BaseShootProbability;

@@ -26,7 +26,6 @@ namespace SpaceInvaders.Systems.Move.MoveKynematicObject
                     //System.Media.SoundPlayer player = new System.Media.SoundPlayer("../../Resources/anim/missile_sound.wav");
                     //player.Play();
                 }
-                
             }
         }
     }

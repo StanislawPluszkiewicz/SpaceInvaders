@@ -57,7 +57,7 @@ namespace SpaceInvaders
         {
             AddGameSystem(new MoveKynematicSystem());
             AddGameSystem(new MoveDynamicSystem());
-            AddGameSystem(new MoveEnnemiLineSystem());
+            AddGameSystem(new MoveEnnemiBlocSystem());
             AddGameSystem(new OffScreenColiderSystem());
             AddGameSystem(new ShootSystem());
             AddGameSystem(new CollisionSystem());

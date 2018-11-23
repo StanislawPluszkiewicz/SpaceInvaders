@@ -13,11 +13,11 @@ namespace SpaceInvaders.Scenes
         public Scene_02_Game()
         {
             Engine.instance.AddEntity(new MenuShortcutsManager());
-            Engine.instance.AddEntity(new Player());
             SpawnEnnemiWave();
+            Engine.instance.AddEntity(new Player());
         }
 
-        public void SpawnEnnemiWave(int ennemiesByLine = 7, int ennemiesByColumn = 5)
+        public void SpawnEnnemiWave(int ennemiesByLine = 7, int ennemiesByColumn = 4)
         {
             List<EnnemiLine> ennemiBlocList = new List<EnnemiLine>();
             for (int y = 0; y < ennemiesByColumn; y++)
@@ -30,8 +30,8 @@ namespace SpaceInvaders.Scenes
                     Engine.instance.AddEntity(ennemi);
                     TransformComponent positionComponent = (TransformComponent)ennemi.GetComponent(typeof(TransformComponent));
                     RenderComponent renderComponent = (RenderComponent)ennemi.GetComponent(typeof(RenderComponent));
-                    float height = (RenderForm.instance.Height * .1f) + y * (renderComponent.Image.Height + 15);
-                    float width = x * (renderComponent.Image.Width + 20);
+                    float height = (RenderForm.instance.Height * .2f) + y * (renderComponent.Image.Height + 15);
+                    float width = x * (renderComponent.Image.Width + 40);
                     positionComponent.Position = new Vecteur2D(width, height);
                 }
                 EnnemiLine ennemiLine = new EnnemiLine(ennemiLineList);

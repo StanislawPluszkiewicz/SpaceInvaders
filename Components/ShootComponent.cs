@@ -6,15 +6,15 @@ using System.Text;
 
 namespace SpaceInvaders.Components
 {
-    class MissileComponent : Component
+    class ShootComponent : Component
     {
-        public MissileComponent(Entity e, double damage = 1, double fireRate = 1) : base(e)
+        public ShootComponent(Entity e, double damage = 1, double fireRate = 1) : base(e)
         {
             Damage = damage;
             FireRate = fireRate;
             TimeSinceLastShoot = 0;
-            ShootProbability = BaseShootProbability = 1;
-            ShootProbabilityIncrementation = 0.1f;
+            ShootProbability = BaseShootProbability = 0.5;
+            ShootProbabilityIncrementation = 0.01f;
         }
 
         public double BaseShootProbability { get; set; } 

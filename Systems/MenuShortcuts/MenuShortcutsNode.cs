@@ -1,6 +1,5 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
-using SpaceInvaders.Entities.Collision;
 using System;
 using System.Collections.Generic;
 using System.Linq;

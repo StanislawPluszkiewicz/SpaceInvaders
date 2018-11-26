@@ -26,7 +26,7 @@ namespace SpaceInvaders.Entities
 
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Acceleration.x = 0;
-            velocity.Acceleration.y = 1.2;
+            velocity.Acceleration.y = 2.5;
 
             CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
         }

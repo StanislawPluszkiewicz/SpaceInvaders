@@ -15,9 +15,9 @@ namespace SpaceInvaders.Components
 
         public VelocityComponent(Entity e) : base(e)
         {
-            Velocity = new Vecteur2D(1.5,1.5);
-            Acceleration = new Vecteur2D(1, 1);
-            AngularVelocity = new Vecteur2D(1, 1);
+            Velocity = new Vecteur2D(0, 0);
+            Acceleration = new Vecteur2D(1,1);
+            AngularVelocity = new Vecteur2D(0, 0);
         }
     }
 }

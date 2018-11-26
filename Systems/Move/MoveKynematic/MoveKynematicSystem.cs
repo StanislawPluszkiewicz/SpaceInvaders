@@ -26,14 +26,14 @@ namespace SpaceInvaders.Systems.Move
             {
                 movement += new Vecteur2D(time, 0);
             }
-            if (Engine.instance.keyPressed.Contains(Keys.Up))
-            {
-                movement += new Vecteur2D(0, -time);
-            }
-            if (Engine.instance.keyPressed.Contains(Keys.Down))
-            {
-                movement += new Vecteur2D(0, time);
-            }
+            //if (Engine.instance.keyPressed.Contains(Keys.Up))
+            //{
+            //    movement += new Vecteur2D(0, -time);
+            //}
+            //if (Engine.instance.keyPressed.Contains(Keys.Down))
+            //{
+            //    movement += new Vecteur2D(0, time);
+            //}
 
             foreach (MoveKynematicNode node in moveNodes)
             {

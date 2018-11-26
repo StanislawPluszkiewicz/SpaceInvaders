@@ -16,7 +16,7 @@ namespace SpaceInvaders.Entities.Missiles
         {
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 0;
-            velocity.Velocity.y = 75;
+            velocity.Velocity.y = 125;
         }
     }
 }

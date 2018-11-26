@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -64,6 +66,7 @@ namespace SpaceInvaders
             AddApplicationSystem(new MenuShortcutsSystem());
         }
 
+        #region internal
         public static Engine CreateEngine()
         {
             if (instance == null)
@@ -155,7 +158,7 @@ namespace SpaceInvaders
                 throw new KeyNotFoundException(e.Message);
             }
         }
-
+        #endregion internal
 
         public void Update(double deltaTime)
         {
@@ -181,6 +184,36 @@ namespace SpaceInvaders
                 var entity = e as Renderable;
                 if (entity != null)
                     ((Renderable)e).Render(g);
+            }
+
+            if (CollisionSystem.DEBUG)
+            {
+                bool DrawHitboxes = true;
+                bool DrawEntitesBorders = false;
+                foreach(CollisionNode node in Engine.instance.nodesByType[typeof(CollisionNode)])
+                {
+                    if (DrawHitboxes)
+                    {
+                        Vecteur4 hitbox = node.CollisionComponent.Hitbox.box;
+                        Rectangle hitboxRect = new Rectangle((int)hitbox.X, (int)hitbox.Y, (int)hitbox.XPlusWidth - (int)hitbox.X, (int)hitbox.YPlusHeight - (int)hitbox.Y);
+                        Pen redPen = new Pen(Color.Red)
+                        {
+                            Alignment = PenAlignment.Inset
+                        };
+                        g.DrawRectangle(redPen, hitboxRect);
+                    }
+                    if (DrawEntitesBorders)
+                    {
+                        Rectangle imageRect = new Rectangle((int)node.RenderComponent.View.x, (int)node.RenderComponent.View.y, node.RenderComponent.Image.Size.Width, node.RenderComponent.Image.Size.Height);
+                        Console.WriteLine(node.RenderComponent.Image.Width);
+
+                        Pen greenPen = new Pen(Color.Green)
+                        {
+                            Alignment = PenAlignment.Inset
+                        };
+                        g.DrawRectangle(greenPen, imageRect);
+                    }
+                }
             }
         }
     }

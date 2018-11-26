@@ -14,6 +14,7 @@ namespace SpaceInvaders.Components
         public enum CollisionState { NotColliding, Colliding }
         public CollisionTag Tag { get; set; }
         public CollisionState State { get; set; }
+        public List<CollisionComponent> CollidingWith { get; set; }
         public Hitbox Hitbox { get; set; }
 
         public delegate void OnCollisionEnter(Entity other);
@@ -28,6 +29,7 @@ namespace SpaceInvaders.Components
             RenderComponent renderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
             Hitbox = new Hitbox(-1, -1, -1, -1);
             State = CollisionState.NotColliding;
+            CollidingWith = new List<CollisionComponent>();
         }
 
     }

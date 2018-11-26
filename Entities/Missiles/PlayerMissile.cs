@@ -13,7 +13,7 @@ namespace SpaceInvaders.Entities.Missiles
     class PlayerMissile : Missile
     {
         public PlayerMissile(Entity e, Image imageTrail = null, Vecteur2D trailOffset = null) : 
-            base(e, Image.FromFile("../../Resources/anim/nyan_cat.gif"), CollisionTag.PLAYER_MISSILE, Image.FromFile("../../Resources/anim/rainbow_trail.png"), new Vecteur2D(1, 1))
+            base(e, Image.FromFile("../../Resources/shoot1.png"), CollisionTag.PLAYER_MISSILE)
         {
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 0;

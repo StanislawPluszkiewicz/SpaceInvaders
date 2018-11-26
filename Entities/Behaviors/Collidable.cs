@@ -17,15 +17,15 @@ namespace SpaceInvaders.Entities
             AddComponent(collisionComponent);
             collisionComponent.onCollisionEnter = (Entity other) =>
             {
-                Console.WriteLine("Collision enter {0} - {1} ({2})", this.GetType().Name, other.GetType().Name, collisionComponent.State);
+                Console.WriteLine("{0} entered collision with {1}", this.GetType().Name, other.GetType().Name);
             };
             collisionComponent.onCollisionStay = (Entity other) =>
             {
-                Console.WriteLine("Collision stay {0} - {1} ({2})", this.GetType().Name, other.GetType().Name, collisionComponent.State);
+                Console.WriteLine("{0} is colliding with {1}", this.GetType().Name, other.GetType().Name);
             };
             collisionComponent.onCollisionExit = (Entity other) =>
             {
-                Console.WriteLine("Collision exit {0} - {1} ({2})", this.GetType().Name, other.GetType().Name, collisionComponent.State);
+                Console.WriteLine("{0} no longer collides with {1}", this.GetType().Name, other.GetType().Name);
             };
         }
         

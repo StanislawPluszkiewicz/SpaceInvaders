@@ -12,11 +12,22 @@ namespace SpaceInvaders.Scenes
     {
         public Scene_02_Game()
         {
-            Engine.instance.AddEntity(new MenuShortcutsManager());
+            InstantiateMenuManagement();
             SpawnEnnemiWave();
+            //SpawnBunkers();
             Engine.instance.AddEntity(new Player());
         }
 
+        public void InstantiateMenuManagement()
+        {
+            Engine.instance.AddEntity(new MenuShortcutsManager());
+        }
+        public void SpawnBunkers()
+        {
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(RenderForm.instance.Width * 1 / 10, RenderForm.instance.Height * 7 / 10)));
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(RenderForm.instance.Width * 4 / 10, RenderForm.instance.Height * 7 / 10)));
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(RenderForm.instance.Width * 7 / 10, RenderForm.instance.Height * 7 / 10)));
+        }
         public void SpawnEnnemiWave(int ennemiesByLine = 7, int ennemiesByColumn = 4)
         {
             List<EnnemiLine> ennemiBlocList = new List<EnnemiLine>();

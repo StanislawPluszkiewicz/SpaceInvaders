@@ -15,7 +15,8 @@ namespace SpaceInvaders.Entities
         public Player() : base(Image.FromFile("../../Resources/ship2.png"), CollisionTag.PLAYER)
         {
             TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
-            transform.Position.x = RenderForm.instance.Size.Width / 2;
+            RenderComponent renderComponent = (RenderComponent)GetComponent(typeof(RenderComponent));
+            transform.Position.x = RenderForm.instance.Size.Width / 2 - renderComponent.Image.Width / 2;
             transform.Position.y = RenderForm.instance.Size.Height * 4 / 5;
 
             AddComponent(new ShootComponent(this, 1, 0.2));

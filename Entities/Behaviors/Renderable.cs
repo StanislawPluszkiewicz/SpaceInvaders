@@ -26,7 +26,7 @@ namespace SpaceInvaders.Entities
                 }
             }
 
-            g.DrawImage(renderComponent.Image, (float)renderComponent.View.x, (float)renderComponent.View.y);
+            g.DrawImage(renderComponent.Image, (float)renderComponent.View.x, (float)renderComponent.View.y, (float)renderComponent.Image.Width, (float)renderComponent.Image.Height);
         }
     }
 }

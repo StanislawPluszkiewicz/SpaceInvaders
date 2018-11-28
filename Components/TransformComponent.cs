@@ -22,17 +22,17 @@ namespace SpaceInvaders.Components
                 position = value;
                 try
                 {
-                    RenderComponent renderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
+                    RenderComponent renderComponent = Entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
                     renderComponent.View = position;
                     try
                     {
-                        CollisionComponent collisionComponent = entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+                        CollisionComponent collisionComponent = Entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
                         HitboxAABB hitboxAABB = collisionComponent.Hitbox as HitboxAABB;
                         hitboxAABB.Update(renderComponent.View.y, renderComponent.View.y + renderComponent.Image.Height, renderComponent.View.x, renderComponent.View.x + renderComponent.Image.Width);
                     }
                     catch { }
                 }
-                catch{ }
+                catch { }
             }
         }
         public Vecteur2D Rotation { get; set; }

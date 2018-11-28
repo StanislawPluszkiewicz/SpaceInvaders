@@ -14,7 +14,7 @@ namespace SpaceInvaders.Scenes
         {
             InstantiateMenuManagement();
             SpawnEnnemiWave();
-            //SpawnBunkers();
+            SpawnBunkers();
             Engine.instance.AddEntity(new Player());
         }
 

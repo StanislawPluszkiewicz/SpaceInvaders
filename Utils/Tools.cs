@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Utils.Hitbox;
+﻿using SpaceInvaders.Components;
+using SpaceInvaders.Utils.Hitbox;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,25 +17,24 @@ namespace SpaceInvaders.Utils
         /// <param name="scrBitmap"></param>
         /// <param name="rectToColor">Relative to image</param>
         /// <returns></returns>
-        public static Image ChangeColor(Image scrBitmap, Vecteur4 rectToColor)
+        public static bool ChangeAABBColor(RenderComponent renderComponent, Vecteur4 rectToColor)
         {
-            Console.WriteLine(rectToColor.X);
-            Console.WriteLine(rectToColor.XPlusWidth);
-            Console.WriteLine(rectToColor.Y);
-            Console.WriteLine(rectToColor.YPlusHeight);
-
-            Color newColor = Color.FromArgb(0, 0, 0, 0);
             Color actualColor;
-            Bitmap newBitmap = new Bitmap(scrBitmap.Width, scrBitmap.Height);
+            bool bitmapHasChanged = false;
             for (int i = (int)rectToColor.X; i < (int)rectToColor.XPlusWidth; i++)
             {
                 for (int j = (int)rectToColor.Y; j < (int)rectToColor.YPlusHeight; j++)
                 {
-                    actualColor = ((Bitmap)scrBitmap).GetPixel(i, j);
-                    newBitmap.SetPixel(i, j, newColor);
+                    actualColor = ((Bitmap)renderComponent.Image).GetPixel(i, j);
+                    if (actualColor.A == 255 && actualColor.R == 0 && actualColor.B == 0 && actualColor.G == 0)
+                    {
+                        ((Bitmap)renderComponent.Image).SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
+                        bitmapHasChanged = true;
+                    }
+
                 }
             }
-            return newBitmap;
+            return bitmapHasChanged;
         }
     }
 }

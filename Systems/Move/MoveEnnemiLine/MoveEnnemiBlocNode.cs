@@ -25,7 +25,7 @@ namespace SpaceInvaders.Systems.Move.MoveEnnemiLine
             Nodes = new List<Node>();
             foreach (MoveDynamicNode node in Engine.instance.nodesByType[typeof(MoveDynamicNode)])
             {
-                if (node.TransformComponent.entity.GetType() == typeof(Ennemi))
+                if (node.TransformComponent.Entity.GetType() == typeof(Ennemi))
                 {
                     Nodes.Add(node);
                 }

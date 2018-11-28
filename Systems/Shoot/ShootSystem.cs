@@ -43,7 +43,7 @@ namespace SpaceInvaders.Systems.Shoot
                     }
                     else if (e is Ennemi)
                     {
-                        if (random.Next(0, 200) < node.MissileComponent.ShootProbability)
+                        if (random.Next(0, 100) < node.MissileComponent.ShootProbability)
                         {
                             Engine.instance.AddEntity(new EnnemiMissile(e));
                             node.MissileComponent.ShootProbability = node.MissileComponent.BaseShootProbability;

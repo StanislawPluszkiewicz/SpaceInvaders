@@ -14,14 +14,12 @@ namespace SpaceInvaders.Entities
     {
         public Ennemi() : base(Image.FromFile("../../Resources/ship1.png"), CollisionTag.ENNEMI)
         {
-            AddComponent(new ShootComponent(this, 1, 0.2));
+            AddComponent(new ShootComponent(this, 1, .03));
 
             VelocityComponent velocity = (VelocityComponent)this.GetComponent(typeof(VelocityComponent));
             velocity.Velocity.x = 50;
             velocity.Velocity.y = 0;
-
-
-            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            
         }
     }
 }

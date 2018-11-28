@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Systems.Collision;
+using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,17 +16,20 @@ namespace SpaceInvaders.Entities
         {
             CollisionComponent collisionComponent = new CollisionComponent(this, collisionTag);
             AddComponent(collisionComponent);
-            collisionComponent.onCollisionEnter = (Entity other) =>
+            collisionComponent.onCollisionEnter = (Collision other) =>
             {
-                Console.WriteLine("{0} entered collision with {1}", this.GetType().Name, other.GetType().Name);
+                if (CollisionSystem.DEBUG)
+                    Console.WriteLine("{0} onCollisionEnter {1}", this.GetType().Name, other.Entity.GetType().Name);
             };
-            collisionComponent.onCollisionStay = (Entity other) =>
+            collisionComponent.onCollisionStay = (Collision other) =>
             {
-                Console.WriteLine("{0} is colliding with {1}", this.GetType().Name, other.GetType().Name);
+                if (CollisionSystem.DEBUG)
+                    Console.WriteLine("{0} onCollisionStay {1}", this.GetType().Name, other.Entity.GetType().Name);
             };
-            collisionComponent.onCollisionExit = (Entity other) =>
+            collisionComponent.onCollisionExit = (Collision other) =>
             {
-                Console.WriteLine("{0} no longer collides with {1}", this.GetType().Name, other.GetType().Name);
+                if (CollisionSystem.DEBUG)
+                    Console.WriteLine("{0} onCollisionExit {1}", this.GetType().Name, other.Entity.GetType().Name);
             };
         }
         

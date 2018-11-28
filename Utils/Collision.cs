@@ -18,9 +18,9 @@ namespace SpaceInvaders.Utils
         public Collision(CollisionComponent collisionComponent, Vecteur4 contacts)
         {
             CollisionComponent = collisionComponent;
-            Entity = collisionComponent.entity;
+            Entity = collisionComponent.Entity;
             Transform = Entity.GetComponent(typeof(TransformComponent)) as TransformComponent;
-            this.Contacts = contacts;
+            Contacts = contacts;
         }
     }
 }

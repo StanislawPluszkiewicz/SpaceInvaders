@@ -20,6 +20,14 @@ namespace SpaceInvaders.Entities.Missiles
             velocity.Velocity.y = -75;
 
             CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            collisionComponent.onCollisionEnter = (Collision collision) =>
+            {
+                if (collision.Entity is Ennemi)
+                {
+                    Engine.instance.RemoveEntity(collision.Entity);
+                    Engine.instance.RemoveEntity(this);
+                }
+            };
         }
     }
 }

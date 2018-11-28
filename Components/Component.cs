@@ -11,10 +11,10 @@ namespace SpaceInvaders.Components
     // Contains only data relevant for an Entity
     // </summary>
     class Component {
-        public Entity entity;
+        public Entity Entity;
         public Component(Entity e)
         {
-            entity = e;
+            Entity = e;
         }
     }
 }

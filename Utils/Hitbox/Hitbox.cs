@@ -25,12 +25,20 @@ namespace SpaceInvaders.Utils.Hitbox
             ((that.box.Y > other.box.YPlusHeight) || (that.box.YPlusHeight < other.box.Y)));
 
         }
-        public static Collision DetailedCollision(CollisionComponent thatCollisionComponent, HitboxAABB thatHitbox, CollisionComponent otherCollisionComponent, HitboxAABB otherHitbox)
+        public Collision DetailedCollision(CollisionComponent otherCollisionComponent)
         {
-            return new Collision(otherCollisionComponent, new Vecteur4(Math.Max(thatHitbox.box.X, otherHitbox.box.X),
-                Math.Max(thatHitbox.box.Y, thatHitbox.box.Y),
-                Math.Max(thatHitbox.box.XPlusWidth, otherHitbox.box.XPlusWidth),
-                Math.Max(thatHitbox.box.YPlusHeight, thatHitbox.box.YPlusHeight)));
+            if (this is HitboxAABB && otherCollisionComponent.Hitbox is HitboxAABB)
+            {
+                double x = Math.Max(((HitboxAABB)this).box.X, ((HitboxAABB)otherCollisionComponent.Hitbox).box.X);
+                double xw = Math.Min(((HitboxAABB)this).box.XPlusWidth, ((HitboxAABB)otherCollisionComponent.Hitbox).box.XPlusWidth);
+                double y = Math.Max(((HitboxAABB)this).box.Y, ((HitboxAABB)otherCollisionComponent.Hitbox).box.Y);
+                double yh = Math.Min(((HitboxAABB)this).box.YPlusHeight, ((HitboxAABB)otherCollisionComponent.Hitbox).box.YPlusHeight);
+
+                return new Collision(otherCollisionComponent, new Vecteur4(y, yh, x, xw));
+            }else
+            {
+                throw new NotImplementedException();
+            }
         }
 
     }

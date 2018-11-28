@@ -17,6 +17,15 @@ namespace SpaceInvaders.Entities.Missiles
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 0;
             velocity.Velocity.y = 125;
+
+            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            collisionComponent.onCollisionEnter = (Collision collision) =>
+            {
+                if (collision.Entity is Player)
+                {
+                    Engine.instance.RemoveEntity(this);
+                }
+            };
         }
     }
 }

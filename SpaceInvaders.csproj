@@ -56,7 +56,7 @@
     <Compile Include="Entities\Ennemies\Ennemi.cs" />
     <Compile Include="Entities\Ennemies\EnnemiBloc.cs" />
     <Compile Include="Entities\Ennemies\EnnemiLine.cs" />
-    <Compile Include="Entities\Menu\MenuShortcutsManager.cs" />
+    <Compile Include="Entities\UI\MenuShortcutsManager.cs" />
     <Compile Include="Entities\Missiles\EnnemiMissile.cs" />
     <Compile Include="Entities\Missiles\PlayerMissile.cs" />
     <Compile Include="Entities\Behaviors\MovementType\IDynamic.cs" />
@@ -173,6 +173,7 @@
     <None Include="Resources\shoot1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Systems\GlobalNodes\" />
     <Folder Include="vendor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

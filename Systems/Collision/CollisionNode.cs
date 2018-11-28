@@ -9,14 +9,10 @@ namespace SpaceInvaders.Systems.Collision
 {
     class CollisionNode : Node
     {
-        public RenderComponent RenderComponent { get; set; }
-        public TransformComponent TransformComponent { get; set; }
         public CollisionComponent CollisionComponent { get; set; }
 
         public CollisionNode(Entity entity)
         {
-            RenderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
-            TransformComponent = entity.GetComponent(typeof(TransformComponent)) as TransformComponent;
             CollisionComponent = entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
         }
 

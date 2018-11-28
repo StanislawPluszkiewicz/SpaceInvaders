@@ -13,8 +13,8 @@ namespace SpaceInvaders.Components
             Damage = damage;
             FireRate = fireRate;
             TimeSinceLastShoot = 0;
-            ShootProbability = BaseShootProbability = 0.5;
-            ShootProbabilityIncrementation = 0.01f;
+            ShootProbability = BaseShootProbability = 1;
+            ShootProbabilityIncrementation = 5;
         }
 
         public double BaseShootProbability { get; set; } 

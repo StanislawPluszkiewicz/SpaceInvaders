@@ -12,14 +12,13 @@ namespace SpaceInvaders.Entities
 {
     class Ennemi : Collidable, IDynamic
     {
-        public Ennemi() : base(Image.FromFile("../../Resources/ship1.png"), CollisionTag.ENNEMI)
+        public Ennemi() : base(Image.FromFile("../../Resources/PNG/Enemies/enemyBlack1.png"), CollisionTag.ENNEMI)
         {
-            AddComponent(new ShootComponent(this, 1, .03));
+            AddComponent(new ShootComponent(this, 1, 1));
 
             VelocityComponent velocity = (VelocityComponent)this.GetComponent(typeof(VelocityComponent));
             velocity.Velocity.x = 50;
             velocity.Velocity.y = 0;
-            
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SpaceInvaders.Systems.Collision
     {
 
         public List<Node> nodes;
-        public static readonly bool DEBUG = true;
+        public static readonly bool DEBUG = false;
         private bool[,] collideableTruthTable;
         private Dictionary<CollisionTag, List<CollisionTag>> canCollideWith;
         private Dictionary<CollisionTag, List<CollisionNode>> segmentedNodes;

@@ -13,7 +13,7 @@ namespace SpaceInvaders.Entities
 {
     class Bunker : Collidable, IStatic
     {
-        public Bunker(Vecteur2D position) : base(Image.FromFile("../../Resources/bunker.png"), CollisionTag.BUNKER)
+        public Bunker(Vecteur2D position) : base(Image.FromFile("../../Resources/old/bunker.png"), CollisionTag.BUNKER)
         {
             TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
             transform.Position = position;

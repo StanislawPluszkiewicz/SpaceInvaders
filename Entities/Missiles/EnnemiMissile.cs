@@ -12,7 +12,7 @@ namespace SpaceInvaders.Entities.Missiles
 {
     class EnnemiMissile : Missile
     {
-        public EnnemiMissile(Entity e) : base(e, Image.FromFile("../../Resources/shoot1.png"), CollisionTag.ENNEMI_MISSILE)
+        public EnnemiMissile(Entity e) : base(e, Image.FromFile("../../Resources/old/shoot1.png"), CollisionTag.ENNEMI_MISSILE)
         {
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 0;

@@ -14,10 +14,10 @@ namespace SpaceInvaders.Entities
     class Player : Collidable, IKynematic
     {
 
-        public int Lives { get; set; }
-        public Player() : base(Image.FromFile("../../Resources/ship2.png"), CollisionTag.PLAYER)
+        public int Lifes { get; set; }
+        public Player() : base(Image.FromFile("../../Resources/PNG/playerShip1_red.png"), CollisionTag.PLAYER)
         {
-            Lives = 3;
+            Lifes = 3;
 
             TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
             RenderComponent renderComponent = (RenderComponent)GetComponent(typeof(RenderComponent));
@@ -39,8 +39,10 @@ namespace SpaceInvaders.Entities
 
         private void TakeDamage()
         {
-            Lives--;
-            if (Lives == 0)
+            Lifes--;
+
+            RenderForm.instance.Text = "You have " + Lifes + " lifes left!";
+            if (Lifes == 0)
             {
                 RenderForm.instance.Text = "You lost!";
             }

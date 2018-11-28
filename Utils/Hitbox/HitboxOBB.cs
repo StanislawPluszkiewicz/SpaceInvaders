@@ -7,9 +7,9 @@ namespace SpaceInvaders.Utils.Hitbox
 {
     /// <summary>
     /// 
-    /// Supports non axis aligned rectangular hitbox
+    /// Supports oriented boundary box hitbox
     /// </summary>
-    class HitboxRect : Hitbox
+    class HitboxOBB : Hitbox
     {
     }
 }

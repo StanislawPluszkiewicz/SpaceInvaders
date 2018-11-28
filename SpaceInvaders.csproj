@@ -93,7 +93,7 @@
     <Compile Include="Utils\Hitbox\Hitbox.cs" />
     <Compile Include="Utils\Hitbox\HitboxAABB.cs" />
     <Compile Include="Utils\Hitbox\HitboxCircle.cs" />
-    <Compile Include="Utils\Hitbox\HitboxRect.cs" />
+    <Compile Include="Utils\Hitbox\HitboxOBB.cs" />
     <Compile Include="Utils\Maths.cs" />
     <Compile Include="Utils\RenderForm.cs">
       <SubType>Form</SubType>

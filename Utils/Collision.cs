@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Utils.Hitbox;
 using System;
 using System.Collections.Generic;
 using System.Linq;

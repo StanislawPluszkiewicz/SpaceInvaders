@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Utils;
+using SpaceInvaders.Utils.Hitbox;
 
 namespace SpaceInvaders.Components
 {
@@ -26,7 +27,8 @@ namespace SpaceInvaders.Components
                     try
                     {
                         CollisionComponent collisionComponent = entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
-                        collisionComponent.Hitbox.Update(renderComponent.View.y, renderComponent.View.y + renderComponent.Image.Height, renderComponent.View.x, renderComponent.View.x + renderComponent.Image.Width);
+                        HitboxAABB hitboxAABB = collisionComponent.Hitbox as HitboxAABB;
+                        hitboxAABB.Update(renderComponent.View.y, renderComponent.View.y + renderComponent.Image.Height, renderComponent.View.x, renderComponent.View.x + renderComponent.Image.Width);
                     }
                     catch { }
                 }

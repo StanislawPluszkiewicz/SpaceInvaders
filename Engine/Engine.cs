@@ -15,6 +15,7 @@ using SpaceInvaders.Systems.Move.MoveKynematicObject;
 using SpaceInvaders.Systems.OffScreenColider;
 using SpaceInvaders.Systems.Shoot;
 using SpaceInvaders.Utils;
+using SpaceInvaders.Utils.Hitbox;
 
 namespace SpaceInvaders
 {
@@ -194,7 +195,7 @@ namespace SpaceInvaders
                 {
                     if (DrawHitboxes)
                     {
-                        Vecteur4 hitbox = node.CollisionComponent.Hitbox.box;
+                        Vecteur4 hitbox = ((HitboxAABB)node.CollisionComponent.Hitbox).box;
                         Rectangle hitboxRect = new Rectangle((int)hitbox.X, (int)hitbox.Y, (int)hitbox.XPlusWidth - (int)hitbox.X, (int)hitbox.YPlusHeight - (int)hitbox.Y);
                         Pen redPen = new Pen(Color.Red)
                         {

@@ -1,6 +1,7 @@
 ﻿using SpaceInvaders.Entities;
 using SpaceInvaders.Systems.Collision;
 using SpaceInvaders.Utils;
+using SpaceInvaders.Utils.Hitbox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace SpaceInvaders.Components
         {
             Tag = tag;
             RenderComponent renderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
-            Hitbox = new Hitbox(-1, -1, -1, -1);
+            Hitbox = new HitboxAABB(-1, -1, -1, -1);
             State = CollisionState.NotColliding;
             CollidingWith = new List<CollisionComponent>();
         }

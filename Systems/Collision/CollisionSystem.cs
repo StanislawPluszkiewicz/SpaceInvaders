@@ -1,6 +1,7 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
 using SpaceInvaders.Utils;
+using SpaceInvaders.Utils.Hitbox;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -56,7 +57,7 @@ namespace SpaceInvaders.Systems.Collision
                     if (other == null || iOrigin == iOther) { continue; } // if cast failed
                     if (CanCollide(origin.CollisionComponent.Tag, other.CollisionComponent.Tag))
                     {
-                        if (origin.CollisionComponent.Hitbox.Collides(other.CollisionComponent.Hitbox))
+                        if (Hitbox.Collides(origin.CollisionComponent.Hitbox, other.CollisionComponent.Hitbox))
                         {
                             origin.CollisionComponent.CollidingWith.Add(other.CollisionComponent);
                             switch (origin.CollisionComponent.State)

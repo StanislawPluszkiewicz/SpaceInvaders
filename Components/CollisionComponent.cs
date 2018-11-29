@@ -16,7 +16,7 @@ namespace SpaceInvaders.Components
         public CollisionTag Tag { get; set; }
         public CollisionState State { get; set; }
         public List<CollisionComponent> CollidingWith { get; set; }
-        public Hitbox Hitbox { get; set; }
+        public IHitbox Hitbox { get; set; }
 
         public delegate void OnCollisionEnter(Collision other);
         public delegate void OnCollisionStay(Collision other);

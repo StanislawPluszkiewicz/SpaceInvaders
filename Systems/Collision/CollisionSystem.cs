@@ -86,13 +86,22 @@ namespace SpaceInvaders.Systems.Collision
 
             for (int iOrigin = 0; iOrigin < nodes.Count; iOrigin++)
             {
-                for (int iOther = 0; iOther < nodes.Count; iOther++)
+                if (Engine.instance.nodesByType[typeof(CollisionNode)].Contains(nodes[iOrigin]))
                 {
-                    if (iOrigin != iOther)
+
+                    for (int iOther = 0; iOther < nodes.Count; iOther++)
                     {
-                        CheckCollision((CollisionNode)nodes[iOrigin], (CollisionNode)nodes[iOther]);
+
+                        if (Engine.instance.nodesByType[typeof(CollisionNode)].Contains(nodes[iOther]))
+                        {
+                            if (iOrigin != iOther)
+                            {
+                                CheckCollision((CollisionNode)nodes[iOrigin], (CollisionNode)nodes[iOther]);
+                            }
+                        }
                     }
                 }
+                
             }
         }
 
@@ -101,7 +110,7 @@ namespace SpaceInvaders.Systems.Collision
         {
             if (CanCollide(origin.CollisionComponent.Tag, other.CollisionComponent.Tag))
             {
-                if (Hitbox.Collides((HitboxAABB)origin.CollisionComponent.Hitbox, (HitboxAABB)other.CollisionComponent.Hitbox))
+                if (origin.CollisionComponent.Hitbox.Collides(other.CollisionComponent.Hitbox))
                 {
                     origin.CollisionComponent.CollidingWith.Add(other.CollisionComponent);
                     Utils.Collision collision = origin.CollisionComponent.Hitbox.DetailedCollision(other.CollisionComponent);

@@ -20,7 +20,7 @@ namespace SpaceInvaders.Entities
             RenderComponent renderComponent = ((RenderComponent)GetComponent(typeof(RenderComponent)));
             if (renderComponent.HasTrail)
             {
-                foreach (Vecteur2D position in renderComponent.TrailPositions)
+                foreach (Vector2D position in renderComponent.TrailPositions)
                 {
                     g.DrawImage(renderComponent.TrailImage, (float)position.x, (float)position.y);
                 }

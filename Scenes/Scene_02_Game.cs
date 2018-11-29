@@ -24,11 +24,11 @@ namespace SpaceInvaders.Scenes
         }
         public void SpawnBunkers()
         {
-            Engine.instance.AddEntity(new Bunker(new Vecteur2D(RenderForm.instance.Width * 1 / 10, RenderForm.instance.Height * 7 / 10)));
-            Engine.instance.AddEntity(new Bunker(new Vecteur2D(RenderForm.instance.Width * 4 / 10, RenderForm.instance.Height * 7 / 10)));
-            Engine.instance.AddEntity(new Bunker(new Vecteur2D(RenderForm.instance.Width * 7 / 10, RenderForm.instance.Height * 7 / 10)));
+            Engine.instance.AddEntity(new Bunker(new Vector2D(RenderForm.instance.Width * 1 / 10, RenderForm.instance.Height * 7 / 10)));
+            Engine.instance.AddEntity(new Bunker(new Vector2D(RenderForm.instance.Width * 4 / 10, RenderForm.instance.Height * 7 / 10)));
+            Engine.instance.AddEntity(new Bunker(new Vector2D(RenderForm.instance.Width * 7 / 10, RenderForm.instance.Height * 7 / 10)));
         }
-        public void SpawnEnnemiWave(int ennemiesByLine = 7, int ennemiesByColumn = 4)
+        public void SpawnEnnemiWave(int ennemiesByLine = 3, int ennemiesByColumn = 2)
         {
             List<EnnemiLine> ennemiBlocList = new List<EnnemiLine>();
             for (int y = 0; y < ennemiesByColumn; y++)
@@ -43,7 +43,7 @@ namespace SpaceInvaders.Scenes
                     RenderComponent renderComponent = (RenderComponent)ennemi.GetComponent(typeof(RenderComponent));
                     float height = (RenderForm.instance.Height * .2f) + y * (renderComponent.Image.Height + 15);
                     float width = x * (renderComponent.Image.Width + 40);
-                    positionComponent.Position = new Vecteur2D(width, height);
+                    positionComponent.Position = new Vector2D(width, height);
                 }
                 EnnemiLine ennemiLine = new EnnemiLine(ennemiLineList);
                 Engine.instance.AddEntity(ennemiLine);

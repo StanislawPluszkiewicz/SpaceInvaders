@@ -6,9 +6,8 @@ using System.Text;
 
 namespace SpaceInvaders.Utils.Hitbox
 {
-    class HitboxAABB : Hitbox
+    class HitboxAABB : IHitbox
     {
-        internal enum Direction { TOP=0, RIGHT, LEFT, BOTTOM}
         public Vecteur4 box;
 
         public HitboxAABB(double top, double bottom, double left, double right)
@@ -22,6 +21,36 @@ namespace SpaceInvaders.Utils.Hitbox
             this.box.YPlusHeight = bottom;
             this.box.X = left;
             this.box.XPlusWidth = right;
+        }
+
+        public bool Collides(IHitbox _other)
+        {
+            if (_other is HitboxAABB)
+            {
+                HitboxAABB other = _other as HitboxAABB;
+                return !(
+                ((box.X > other.box.XPlusWidth) || (box.XPlusWidth<other.box.X)) ||
+                ((box.Y > other.box.YPlusHeight) || (box.YPlusHeight<other.box.Y)));
+            }
+            throw new NotImplementedException();
+
+        }
+
+        public new Collision DetailedCollision(CollisionComponent otherCollisionComponent)
+        {
+            if (otherCollisionComponent.Hitbox is HitboxAABB)
+            {
+                double x = Math.Max(((HitboxAABB)this).box.X, ((HitboxAABB)otherCollisionComponent.Hitbox).box.X);
+                double xw = Math.Min(((HitboxAABB)this).box.XPlusWidth, ((HitboxAABB)otherCollisionComponent.Hitbox).box.XPlusWidth);
+                double y = Math.Max(((HitboxAABB)this).box.Y, ((HitboxAABB)otherCollisionComponent.Hitbox).box.Y);
+                double yh = Math.Min(((HitboxAABB)this).box.YPlusHeight, ((HitboxAABB)otherCollisionComponent.Hitbox).box.YPlusHeight);
+
+                return new Collision(otherCollisionComponent, new Vecteur4(y, yh, x, xw));
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 

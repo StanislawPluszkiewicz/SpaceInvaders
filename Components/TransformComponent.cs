@@ -10,8 +10,8 @@ namespace SpaceInvaders.Components
 {
     class TransformComponent : Component
     {
-        private Vecteur2D position;
-        public Vecteur2D Position
+        private Vector2D position;
+        public Vector2D Position
         {
             get
             {
@@ -35,14 +35,14 @@ namespace SpaceInvaders.Components
                 catch { }
             }
         }
-        public Vecteur2D Rotation { get; set; }
-        public Vecteur2D LocalScale { get; set; }
+        public Vector2D Rotation { get; set; }
+        public Vector2D LocalScale { get; set; }
 
         public TransformComponent(Entity e) : base(e)
         {
-            position = new Vecteur2D(0,0);
-            Rotation = new Vecteur2D(0, 0);
-            LocalScale = new Vecteur2D(1, 1);
+            position = new Vector2D(0,0);
+            Rotation = new Vector2D(0, 0);
+            LocalScale = new Vector2D(1, 1);
         }
     }
 }

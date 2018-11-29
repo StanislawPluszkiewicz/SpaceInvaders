@@ -16,15 +16,15 @@ namespace SpaceInvaders.Systems.Move
         {
             moveNodes = Engine.instance.nodesByType[typeof(MoveKynematicNode)];
 
-            Vecteur2D movement = new Vecteur2D();
+            Vector2D movement = new Vector2D();
             
             if (Engine.instance.keyPressed.Contains(Keys.Left))
             {
-                movement += new Vecteur2D(-time, 0);
+                movement += new Vector2D(-time, 0);
             }
             if (Engine.instance.keyPressed.Contains(Keys.Right))
             {
-                movement += new Vecteur2D(time, 0);
+                movement += new Vector2D(time, 0);
             }
             //if (Engine.instance.keyPressed.Contains(Keys.Up))
             //{
@@ -38,7 +38,7 @@ namespace SpaceInvaders.Systems.Move
             foreach (MoveKynematicNode node in moveNodes)
             {
                 // Clip movement to the screen without blocking one axis when the other tries to get out of bounds
-                Vecteur2D newPosition = node.TransformComponent.Position + (movement * node.VelocityComponent.Velocity);
+                Vector2D newPosition = node.TransformComponent.Position + (movement * node.VelocityComponent.Velocity);
                 newPosition.x = Maths.Clamp(newPosition.x, 0, RenderForm.instance.Width - node.RenderComponent.Image.Width);
                 newPosition.y = Maths.Clamp(newPosition.y, 0, RenderForm.instance.Height - node.RenderComponent.Image.Height);
                 node.TransformComponent.Position = newPosition;

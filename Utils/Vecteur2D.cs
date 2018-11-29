@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SpaceInvaders.Utils
 {
-    class Vecteur2D
+    class Vector2D
     {
 
         /// <summary>
@@ -20,50 +20,58 @@ namespace SpaceInvaders.Utils
             }
         }
 
+        public double Dot(Vector2D other)
+        {
+            return x * other.x + y * other.y;
+        }
 
-        public Vecteur2D(double _x = 0, double _y = 0)
+        public Vector2D OrthogonalProjection(Vector2D point)
+        // projects point on this
+        {
+            return (this.Dot(point) / point.Norme) * point;
+        }
+        public Vector2D(double _x = 0, double _y = 0)
         {
             x = _x;
             y = _y;
         }
 
-        public static Vecteur2D operator+ (Vecteur2D v1, Vecteur2D v2)
+        public static Vector2D operator+ (Vector2D v1, Vector2D v2)
         {
-            return new Vecteur2D(v1.x + v2.x, v1.y + v2.y);
+            return new Vector2D(v1.x + v2.x, v1.y + v2.y);
         }
 
-        public static Vecteur2D operator- (Vecteur2D v1, Vecteur2D v2)
+        public static Vector2D operator- (Vector2D v1, Vector2D v2)
         {
-            return new Vecteur2D(v1.x - v2.x, v1.y - v2.y);
+            return new Vector2D(v1.x - v2.x, v1.y - v2.y);
         }
 
-        public static Vecteur2D operator- (Vecteur2D v)
+        public static Vector2D operator- (Vector2D v)
         {
-            return new Vecteur2D(-v.x, -v.y);
+            return new Vector2D(-v.x, -v.y);
         }
 
-        public static Vecteur2D operator* (double k, Vecteur2D v)
+        public static Vector2D operator* (double k, Vector2D v)
         {
-            return new Vecteur2D(k * v.x, k * v.y);
+            return new Vector2D(k * v.x, k * v.y);
         }
 
-        public static Vecteur2D operator *(Vecteur2D v1, Vecteur2D v2)
+        public static Vector2D operator *(Vector2D v1, Vector2D v2)
         {
-            return new Vecteur2D(v1.x * v2.x, v1.y * v2.y);
+            return new Vector2D(v1.x * v2.x, v1.y * v2.y);
         }
 
-        public static Vecteur2D operator* (Vecteur2D v, double k)
+        public static Vector2D operator* (Vector2D v, double k)
         {
-            return new Vecteur2D(k * v.x, k * v.y);
+            return new Vector2D(k * v.x, k * v.y);
         }
 
-        public static Vecteur2D operator/ (Vecteur2D v, double k)
+        public static Vector2D operator/ (Vector2D v, double k)
         {
             if (k == 0)
                 throw new DivideByZeroException("Divison par zero invalide!");
-            return new Vecteur2D(v.x / k, v.y / k);
+            return new Vector2D(v.x / k, v.y / k);
         }
-
     }
 
     

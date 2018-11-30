@@ -10,8 +10,8 @@ namespace SpaceInvaders.Components
 {
     class TransformComponent : Component
     {
-        private Vector2D position;
-        public Vector2D Position
+        private Vector2 position;
+        public Vector2 Position
         {
             get
             {
@@ -27,22 +27,21 @@ namespace SpaceInvaders.Components
                     try
                     {
                         CollisionComponent collisionComponent = Entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
-                        HitboxAABB hitboxAABB = collisionComponent.Hitbox as HitboxAABB;
-                        hitboxAABB.Update(renderComponent.View.y, renderComponent.View.y + renderComponent.Image.Height, renderComponent.View.x, renderComponent.View.x + renderComponent.Image.Width);
+                        collisionComponent.Hitbox.Update(renderComponent.View);
                     }
                     catch { }
                 }
                 catch { }
             }
         }
-        public Vector2D Rotation { get; set; }
-        public Vector2D LocalScale { get; set; }
+        public Vector2 Rotation { get; set; }
+        public Vector2 LocalScale { get; set; }
 
         public TransformComponent(Entity e) : base(e)
         {
-            position = new Vector2D(0,0);
-            Rotation = new Vector2D(0, 0);
-            LocalScale = new Vector2D(1, 1);
+            position = new Vector2(0,0);
+            Rotation = new Vector2(0, 0);
+            LocalScale = new Vector2(1, 1);
         }
     }
 }

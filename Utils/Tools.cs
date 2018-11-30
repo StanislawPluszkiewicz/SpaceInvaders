@@ -17,13 +17,13 @@ namespace SpaceInvaders.Utils
         /// <param name="scrBitmap"></param>
         /// <param name="rectToColor">Relative to image</param>
         /// <returns></returns>
-        public static bool ChangeAABBColor(RenderComponent renderComponent, Vecteur4 rectToColor)
+        public static bool ChangeAABBColorToTransparent(RenderComponent renderComponent, AxisAlignedBoundedBox rectToColor)
         {
             Color actualColor;
             bool bitmapHasChanged = false;
-            for (int i = (int)rectToColor.X; i < (int)rectToColor.XPlusWidth; i++)
+            for (int i = (int)rectToColor.x; i < (int)(rectToColor.x +rectToColor.Width); i++)
             {
-                for (int j = (int)rectToColor.Y; j < (int)rectToColor.YPlusHeight; j++)
+                for (int j = (int)rectToColor.y; j < (int)(rectToColor.y + rectToColor.Height); j++)
                 {
                     actualColor = ((Bitmap)renderComponent.Image).GetPixel(i, j);
                     if (actualColor.A == 255 && actualColor.R == 0 && actualColor.B == 0 && actualColor.G == 0)

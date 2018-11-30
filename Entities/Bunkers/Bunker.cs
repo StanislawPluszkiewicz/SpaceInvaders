@@ -13,7 +13,7 @@ namespace SpaceInvaders.Entities
 {
     class Bunker : Collidable, IStatic
     {
-        public Bunker(Vector2D position) : base(Image.FromFile("../../Resources/old/bunker.png"), CollisionTag.BUNKER)
+        public Bunker(Vector2 position) : base(Image.FromFile("../../Resources/old/bunker.png"), CollisionTag.BUNKER)
         {
             TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
             transform.Position = position;
@@ -37,12 +37,12 @@ namespace SpaceInvaders.Entities
             if (collision.Entity is Missile)
             {
                 TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
-                double x = collision.Contacts.X - transform.Position.x;
-                double xw = collision.Contacts.XPlusWidth - transform.Position.x;
-                double y = collision.Contacts.Y - transform.Position.y;
-                double yh = collision.Contacts.YPlusHeight - transform.Position.y;
+                double x = collision.Contacts.x - transform.Position.x;
+                double w = collision.Contacts.Width - transform.Position.x;
+                double y = collision.Contacts.y - transform.Position.y;
+                double h = collision.Contacts.Height - transform.Position.y;
                 RenderComponent renderComponent = GetComponent(typeof(RenderComponent)) as RenderComponent;
-                if (Tools.ChangeAABBColor(renderComponent, new Vecteur4(y, yh, x, xw)))
+                if (Tools.ChangeAABBColorToTransparent(renderComponent, new AxisAlignedBoundedBox(x, w, y, h)))
                 {
                     Engine.instance.RemoveEntity(collision.Entity);
                 }

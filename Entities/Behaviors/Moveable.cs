@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Moveable : Renderable
+    public class Moveable : Renderable
     {
         public Moveable(Image image) : base(image)
         {

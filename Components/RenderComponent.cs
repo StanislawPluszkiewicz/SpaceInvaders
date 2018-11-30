@@ -12,36 +12,36 @@ namespace SpaceInvaders.Components
     // Entities that have this component will be rendered
     {
         public Image Image { get; set; }
-        public Vector2D View { get; set; }
+        public Vector2 View { get; set; }
 
         #region trail
 
         public bool HasTrail = false;
         public Image TrailImage{ get; set; }
-        public Vector2D TrailOffset { get; set; }
-        public List<Vector2D> TrailPositions { get; set; }
+        public Vector2 TrailOffset { get; set; }
+        public List<Vector2> TrailPositions { get; set; }
         private int TrailSize = 200;
-        public void SetTrail(Image trailImage, Vector2D trailOffset)
+        public void SetTrail(Image trailImage, Vector2 trailOffset)
         {
             TrailOffset = trailOffset;
             TrailImage = trailImage;
             HasTrail = true;
         }
 
-        internal void UpdateTrail(Vector2D position)
+        internal void UpdateTrail(Vector2 position)
         {
             if (TrailPositions.Count > TrailSize)
             {
                 TrailPositions.RemoveAt(TrailSize);
             }
-            TrailPositions.Insert(0, position + TrailOffset + new Vector2D(0, + Image.Size.Height / 2));
+            TrailPositions.Insert(0, position + TrailOffset + new Vector2(0, + Image.Size.Height / 2));
         }
         #endregion trail
         public RenderComponent(Entity e, Image image) : base(e)
         {
             Image = image;
-            TrailPositions = new List<Vector2D>();
-            View = new Vector2D(0, 0);
+            TrailPositions = new List<Vector2>();
+            View = new Vector2(0, 0);
         }
     }
 }

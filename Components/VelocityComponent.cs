@@ -9,15 +9,15 @@ namespace SpaceInvaders.Components
 {
     class VelocityComponent : Component
     {
-        public Vector2D Velocity { get; set; }
-        public Vector2D Acceleration { get; set; }
-        public Vector2D AngularVelocity { get; set; }
+        public Vector2 Velocity { get; set; }
+        public Vector2 Acceleration { get; set; }
+        public Vector2 AngularVelocity { get; set; }
 
         public VelocityComponent(Entity e) : base(e)
         {
-            Velocity = new Vector2D(0, 0);
-            Acceleration = new Vector2D(1,1);
-            AngularVelocity = new Vector2D(0, 0);
+            Velocity = new Vector2(0, 0);
+            Acceleration = new Vector2(1,1);
+            AngularVelocity = new Vector2(0, 0);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.Components;
+using SpaceInvaders.Utils.GeometricForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +9,23 @@ namespace SpaceInvaders.Utils.Hitbox
 {
     class HitboxAABB : IHitbox
     {
-        public Vecteur4 box;
+        public AxisAlignedBoundedBox box;
 
-        public HitboxAABB(double top, double bottom, double left, double right)
-        {
-            box = new Vecteur4(top, bottom, left, right);
+        public Vector2 Position { 
+            get
+            {
+                return new Vector2(this.box.x, this.box.y);
+            }
+            set
+            {
+                box.x = value.x;
+                box.y = value.y;
+            }
         }
 
-        public void Update(double top, double bottom, double left, double right)
+        public HitboxAABB(double x, double width, double y, double height)
         {
-            this.box.Y = top;
-            this.box.YPlusHeight = bottom;
-            this.box.X = left;
-            this.box.XPlusWidth = right;
+            box = new AxisAlignedBoundedBox(x, width, y, height);
         }
 
         public bool Collides(IHitbox _other)
@@ -28,24 +33,30 @@ namespace SpaceInvaders.Utils.Hitbox
             if (_other is HitboxAABB)
             {
                 HitboxAABB other = _other as HitboxAABB;
-                return !(
-                ((box.X > other.box.XPlusWidth) || (box.XPlusWidth<other.box.X)) ||
-                ((box.Y > other.box.YPlusHeight) || (box.YPlusHeight<other.box.Y)));
+                bool test = !(
+                ((box.x > other.box.x + other.box.Width) || (box.x + box.Width < other.box.x)) ||
+                ((box.y > other.box.y + other.box.Height) || (box.y + box.Height < other.box.y)));
+                if (test)
+                {
+                    Console.WriteLine(test);
+                }
+                return test;
             }
             throw new NotImplementedException();
 
         }
 
-        public new Collision DetailedCollision(CollisionComponent otherCollisionComponent)
+        public Collision DetailedCollision(IHitbox other)
         {
-            if (otherCollisionComponent.Hitbox is HitboxAABB)
+            if (other is HitboxAABB)
             {
-                double x = Math.Max(((HitboxAABB)this).box.X, ((HitboxAABB)otherCollisionComponent.Hitbox).box.X);
-                double xw = Math.Min(((HitboxAABB)this).box.XPlusWidth, ((HitboxAABB)otherCollisionComponent.Hitbox).box.XPlusWidth);
-                double y = Math.Max(((HitboxAABB)this).box.Y, ((HitboxAABB)otherCollisionComponent.Hitbox).box.Y);
-                double yh = Math.Min(((HitboxAABB)this).box.YPlusHeight, ((HitboxAABB)otherCollisionComponent.Hitbox).box.YPlusHeight);
+                AxisAlignedBoundedBox otherBox = ((HitboxAABB)other).box;
+                double x = Math.Max(box.x, otherBox.x);
+                double w = Math.Min(box.x + box.Width, otherBox.x + otherBox.Width) - x;
+                double y = Math.Max(box.y, otherBox.y);
+                double h = Math.Min(box.y + box.Height, otherBox.y + otherBox.Height) - y;
 
-                return new Collision(otherCollisionComponent, new Vecteur4(y, yh, x, xw));
+                return new Collision(new AxisAlignedBoundedBox(x, w, y, h));
             }
             else
             {
@@ -54,21 +65,5 @@ namespace SpaceInvaders.Utils.Hitbox
         }
     }
 
-    public class Vecteur4
-    {
-        public Vecteur4(double y, double yPlusHeight, double x, double xPlusWidth)
-        {
-            Y = y;
-            YPlusHeight = yPlusHeight;
-            X = x;
-            XPlusWidth = xPlusWidth;
-        }
-
-        public double Y { get; set; }
-        public double YPlusHeight { get; set; }
-        public double X { get; set; }
-        public double XPlusWidth { get; set; }
-        // not storing height/width for performances (so we don't have to the addition multiple (squared Collidable count) times per frame) 
-        // -> instead this is calculated with the hitbox update once per each Collidable per frame
-    }
+    
 }

@@ -8,17 +8,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using static SpaceInvaders.Components.CollisionComponent;
+using static SpaceInvaders.Utils.Hitbox.Hitbox;
 
 namespace SpaceInvaders.Systems.Collision
 {
     class CollisionSystem : ISystem
     {
+        public static readonly bool DEBUG = false;
 
         public List<Node> nodes;
-        public static readonly bool DEBUG = false;
         private bool[,] collideableTruthTable;
         private Dictionary<CollisionTag, List<CollisionTag>> canCollideWith;
-        private Dictionary<CollisionTag, List<CollisionNode>> segmentedNodes;
+        //private Dictionary<CollisionTag, List<CollisionNode>> segmentedNodes;
+
+        public object CollisionState { get; private set; }
 
         public CollisionSystem()
         {
@@ -52,15 +55,15 @@ namespace SpaceInvaders.Systems.Collision
         public void Update(double time)
         {
             nodes = Engine.instance.nodesByType[typeof(CollisionNode)];
-            segmentedNodes = new Dictionary<CollisionTag, List<CollisionNode>>();
-            foreach (CollisionTag tag in (CollisionTag[])Enum.GetValues(typeof(CollisionTag)))
-            {
-                segmentedNodes[tag] = new List<CollisionNode>();
-            }
-            foreach (CollisionNode node in nodes)
-            {
-                segmentedNodes[node.CollisionComponent.Tag].Add(node);
-            }
+            //segmentedNodes = new Dictionary<CollisionTag, List<CollisionNode>>();
+            //foreach (CollisionTag tag in (CollisionTag[])Enum.GetValues(typeof(CollisionTag)))
+            //{
+            //    segmentedNodes[tag] = new List<CollisionNode>();
+            //}
+            //foreach (CollisionNode node in nodes)
+            //{
+            //    segmentedNodes[node.CollisionComponent.Tag].Add(node);
+            //}
 
             //int iterations = 0;
             //foreach (CollisionTag originTag in (CollisionTag[])Enum.GetValues(typeof(CollisionTag)))
@@ -110,17 +113,17 @@ namespace SpaceInvaders.Systems.Collision
         {
             if (CanCollide(origin.CollisionComponent.Tag, other.CollisionComponent.Tag))
             {
-                if (origin.CollisionComponent.Hitbox.Collides(other.CollisionComponent.Hitbox))
+                if (origin.CollisionComponent.Hitbox.MayBeColliding(other.CollisionComponent.Hitbox))
                 {
-                    origin.CollisionComponent.CollidingWith.Add(other.CollisionComponent);
-                    Utils.Collision collision = origin.CollisionComponent.Hitbox.DetailedCollision(other.CollisionComponent);
-                    switch (origin.CollisionComponent.State)
+                    Utils.Collision collision = origin.CollisionComponent.Hitbox.GetCollision(other.CollisionComponent);
+                    origin.CollisionComponent.Hitbox.CollidingWith.Add(other.CollisionComponent);
+                    switch (origin.CollisionComponent.Hitbox.State)
                     {
-                        case CollisionState.NOT_COLLIDING:
+                        case HitboxState.NOT_COLLIDING:
                             origin.CollisionComponent.onCollisionEnter(collision);
-                            origin.CollisionComponent.State = CollisionState.COLLIDING;
+                            origin.CollisionComponent.Hitbox.State = HitboxState.COLLIDING;
                             break;
-                        case CollisionState.COLLIDING:
+                        case HitboxState.COLLIDING:
                             origin.CollisionComponent.onCollisionStay(collision);
                             break;
                     }
@@ -128,16 +131,15 @@ namespace SpaceInvaders.Systems.Collision
                 else
                 {
 
-                    if (origin.CollisionComponent.State == CollisionState.COLLIDING && origin.CollisionComponent.CollidingWith.Contains(other.CollisionComponent))
+                    if (origin.CollisionComponent.Hitbox.State == HitboxState.COLLIDING && origin.CollisionComponent.Hitbox.CollidingWith.Contains(other.CollisionComponent))
                     {
-                        Utils.Collision collision = origin.CollisionComponent.Hitbox.DetailedCollision(other.CollisionComponent);
-                        origin.CollisionComponent.CollidingWith.Remove(other.CollisionComponent);
-                        if (origin.CollisionComponent.CollidingWith.Count == 0)
+                        Utils.Collision collision = origin.CollisionComponent.Hitbox.GetCollision(other.CollisionComponent);
+                        origin.CollisionComponent.Hitbox.CollidingWith.Remove(other.CollisionComponent);
+                        if (origin.CollisionComponent.Hitbox.CollidingWith.Count == 0)
                         {
-                            origin.CollisionComponent.State = CollisionState.NOT_COLLIDING;
+                            origin.CollisionComponent.Hitbox.State = HitboxState.NOT_COLLIDING;
                         }
                         origin.CollisionComponent.onCollisionExit(collision);
-                        // other might be colliding with another object 
                     }
                 }
             }

@@ -14,14 +14,14 @@ namespace SpaceInvaders.Utils.Hitbox
     {
         // TODO, implement one day :)
 
-        public List<Vector2D> points;
+        public List<Vector2> points;
         private List<Edge> edges;
 
-        public HitboxOBB(params Vector2D[] _points)
+        public HitboxOBB(params Vector2[] _points)
         {
-            points = new List<Vector2D>();
+            points = new List<Vector2>();
             edges = new List<Edge>();
-            foreach (Vector2D point in _points)
+            foreach (Vector2 point in _points)
             {
                 points.Add(point);
             }
@@ -33,6 +33,8 @@ namespace SpaceInvaders.Utils.Hitbox
                 edges.Add(new Edge(3, 0));
             }
         }
+
+        public Vector2 Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool Collides(IHitbox _other)
         {
@@ -54,7 +56,7 @@ namespace SpaceInvaders.Utils.Hitbox
             throw new NotImplementedException();
         }
 
-        public Collision DetailedCollision(CollisionComponent otherCollisionComponent)
+        public Collision DetailedCollision(IHitbox other)
         {
             throw new NotImplementedException();
         }

@@ -9,14 +9,13 @@ using System.Text;
 
 namespace SpaceInvaders.Components
 {
-    class CollisionComponent : Component
+    public class CollisionComponent : Component
     {
-        public enum CollisionTag { PLAYER = 0, ENNEMI, PLAYER_MISSILE, ENNEMI_MISSILE, BUNKER };
-        public enum CollisionState { NOT_COLLIDING, COLLIDING }
+        public enum CollisionTag { PLAYER = 0, ENNEMI, PLAYER_MISSILE, ENNEMI_MISSILE, BUNKER }; // used as a index
         public CollisionTag Tag { get; set; }
-        public CollisionState State { get; set; }
-        public List<CollisionComponent> CollidingWith { get; set; }
-        public IHitbox Hitbox { get; set; }
+
+        public Hitbox Hitbox { get; set; }
+        
 
         public delegate void OnCollisionEnter(Collision other);
         public delegate void OnCollisionStay(Collision other);
@@ -29,9 +28,8 @@ namespace SpaceInvaders.Components
         {
             Tag = tag;
             RenderComponent renderComponent = Entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
-            Hitbox = new HitboxAABB(-1, -1, -1, -1);
-            State = CollisionState.NOT_COLLIDING;
-            CollidingWith = new List<CollisionComponent>();
+            HitboxAABB body = new HitboxAABB(renderComponent.View.x, renderComponent.Image.Width, renderComponent.View.y, renderComponent.Image.Height);
+            Hitbox = new Hitbox(body, body, null, null);
         }
 
     }

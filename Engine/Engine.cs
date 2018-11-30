@@ -179,18 +179,18 @@ namespace SpaceInvaders
             }
         }
 
-        private void DebugRender(Graphics g)
+        private void DebugRender(Graphics g, Entity entity)
         {
-            bool DrawHitboxes = false;
+            bool DrawHitboxes = true;
             bool DrawEntitesBorders = false;
-            foreach (Entity entity in entities)
+            if (DrawHitboxes)
             {
-                if (DrawHitboxes)
+                if (entity.GetComponent(typeof(CollisionComponent)) is CollisionComponent collisionComponent)
                 {
-                    if (entity.GetComponent(typeof(CollisionComponent)) is CollisionComponent collisionComponent)
+                    CollisionComponent c = collisionComponent;
+                    if (collisionComponent.Hitbox.ApproximativeHitbox is HitboxAABB hitbox)
                     {
-                        Vecteur4 hitbox = ((HitboxAABB)collisionComponent.Hitbox).box;
-                        Rectangle hitboxRect = new Rectangle((int)hitbox.X, (int)hitbox.Y, (int)hitbox.XPlusWidth - (int)hitbox.X, (int)hitbox.YPlusHeight - (int)hitbox.Y);
+                        Rectangle hitboxRect = new Rectangle((int)hitbox.box.x, (int)hitbox.box.y, (int)hitbox.box.Width, (int)hitbox.box.Height);
                         Pen redPen = new Pen(Color.Red)
                         {
                             Alignment = PenAlignment.Inset
@@ -198,18 +198,18 @@ namespace SpaceInvaders
                         g.DrawRectangle(redPen, hitboxRect);
                     }
                 }
-                if (DrawEntitesBorders)
+            }
+            if (DrawEntitesBorders)
+            {
+                if (entity.GetComponent(typeof(RenderComponent)) is RenderComponent renderComponent)
                 {
-                    if (entity.GetComponent(typeof(RenderComponent)) is RenderComponent renderComponent)
-                    {
-                        Rectangle imageRect = new Rectangle((int)renderComponent.View.x, (int)renderComponent.View.y, renderComponent.Image.Size.Width, renderComponent.Image.Size.Height);
+                    Rectangle imageRect = new Rectangle((int)renderComponent.View.x, (int)renderComponent.View.y, renderComponent.Image.Size.Width, renderComponent.Image.Size.Height);
 
-                        Pen greenPen = new Pen(Color.Green)
-                        {
-                            Alignment = PenAlignment.Inset
-                        };
-                        g.DrawRectangle(greenPen, imageRect);
-                    }
+                    Pen greenPen = new Pen(Color.Green)
+                    {
+                        Alignment = PenAlignment.Inset
+                    };
+                    g.DrawRectangle(greenPen, imageRect);
                 }
             }
         }
@@ -218,9 +218,13 @@ namespace SpaceInvaders
             foreach(Entity e in entities)
             {
                 if (e is Renderable entity)
+                {
                     entity.Render(g);
-            }
+                    DebugRender(g, entity);
 
+                }
+
+            }
         }
     }
 }

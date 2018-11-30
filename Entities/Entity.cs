@@ -6,7 +6,7 @@ using SpaceInvaders.Components;
 
 namespace SpaceInvaders.Entities
 {
-    abstract class Entity
+    public abstract class Entity
     {
         protected Entity()
         {

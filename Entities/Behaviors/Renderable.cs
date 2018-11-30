@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Renderable : Entity
+    public class Renderable : Entity
     {
         public Renderable(Image image) : base()
         {
@@ -20,7 +20,7 @@ namespace SpaceInvaders.Entities
             RenderComponent renderComponent = ((RenderComponent)GetComponent(typeof(RenderComponent)));
             if (renderComponent.HasTrail)
             {
-                foreach (Vector2D position in renderComponent.TrailPositions)
+                foreach (Vector2 position in renderComponent.TrailPositions)
                 {
                     g.DrawImage(renderComponent.TrailImage, (float)position.x, (float)position.y);
                 }

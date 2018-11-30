@@ -10,7 +10,7 @@ using static SpaceInvaders.Components.CollisionComponent;
 
 namespace SpaceInvaders.Entities
 {
-    abstract class Collidable : Moveable
+    public abstract class Collidable : Moveable
     {
         public Collidable(Image image, CollisionTag collisionTag) : base(image)
         {

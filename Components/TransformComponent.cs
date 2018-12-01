@@ -8,7 +8,7 @@ using SpaceInvaders.Utils.Hitbox;
 
 namespace SpaceInvaders.Components
 {
-    class TransformComponent : Component
+    public class TransformComponent : Component
     {
         private Vector2 position;
         public Vector2 Position

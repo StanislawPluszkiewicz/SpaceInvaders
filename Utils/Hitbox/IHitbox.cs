@@ -10,7 +10,7 @@ namespace SpaceInvaders.Utils.Hitbox
     
 
 
-    interface IHitbox
+    public interface IHitbox
     {
 
         Vector2 Position { get; set; }

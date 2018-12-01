@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SpaceInvaders.Utils.Hitbox
 {
-    class Hitbox
+    public class Hitbox
     {
         public enum HitboxState { NOT_COLLIDING, COLLIDING }
         public HitboxState State { get; set; }

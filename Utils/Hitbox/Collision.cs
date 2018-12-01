@@ -10,7 +10,7 @@ using static SpaceInvaders.Utils.Hitbox.Hitbox;
 
 namespace SpaceInvaders.Utils
 {
-    class Collision
+    public class Collision
     {
         public Entity Entity { get; private set; }
         public TransformComponent Transform { get; private set; }

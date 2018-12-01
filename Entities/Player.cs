@@ -1,6 +1,7 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Systems.Collision;
 using SpaceInvaders.Utils;
+using SpaceInvaders.Utils.GeometricForms;
 using SpaceInvaders.Utils.Hitbox;
 using System;
 using System.Collections.Generic;

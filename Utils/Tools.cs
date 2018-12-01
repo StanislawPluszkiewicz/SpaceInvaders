@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.Components;
+using SpaceInvaders.Utils.GeometricForms;
 using SpaceInvaders.Utils.Hitbox;
 using System;
 using System.Collections.Generic;

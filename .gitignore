@@ -1,2 +1,14 @@
 bin/
 obj/
+*.sqlite
+*.ide
+*.json
+*.ide
+*.ide
+*.ide-shm
+*.ide-wal
+.vs/SpaceInvaders/v15/.suo
+.vs/SpaceInvaders/v15/Server/sqlite3/storage.ide
+*.ide
+.vs/SpaceInvaders/v15/.suo
+.vs/SpaceInvaders/v15/Server/sqlite3/storage.ide

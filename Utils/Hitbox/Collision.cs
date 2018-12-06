@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static SpaceInvaders.Utils.Hitbox.Hitbox;
+using static SpaceInvaders.Utils.Hitbox.ShipHitbox;
 
 namespace SpaceInvaders.Utils
 {
@@ -29,7 +29,7 @@ namespace SpaceInvaders.Utils
         {
             CollisionComponent = collisionComponent;
             Entity = collisionComponent.Entity;
-            Transform = Entity.GetComponent(typeof(TransformComponent)) as TransformComponent;
+            Transform = Entity.Components[typeof(TransformComponent)] as TransformComponent;
         }
     }
 }

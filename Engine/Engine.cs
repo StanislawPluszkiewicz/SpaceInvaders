@@ -59,13 +59,13 @@ namespace SpaceInvaders
 
         private void AddAllSystems()
         {
-            AddGameSystem(new MoveKynematicSystem());
-            AddGameSystem(new MoveDynamicSystem());
-            AddGameSystem(new MoveEnnemiBlocSystem());
-            AddGameSystem(new OffScreenColiderSystem());
-            AddGameSystem(new ShootSystem());
-            AddGameSystem(new CollisionSystem());
-            AddApplicationSystem(new MenuShortcutsSystem());
+            //AddGameSystem(new MoveKynematicSystem());
+            //AddGameSystem(new MoveDynamicSystem());
+            //AddGameSystem(new MoveEnnemiBlocSystem());
+            //AddGameSystem(new OffScreenColiderSystem());
+            //AddGameSystem(new ShootSystem());
+            //AddGameSystem(new CollisionSystem());
+            //AddApplicationSystem(new MenuShortcutsSystem());
         }
 
         #region internal
@@ -185,7 +185,7 @@ namespace SpaceInvaders
             bool DrawEntitesBorders = false;
             if (DrawHitboxes)
             {
-                if (entity.GetComponent(typeof(CollisionComponent)) is CollisionComponent collisionComponent)
+                if (entity.Components[typeof(CollisionComponent)] is CollisionComponent collisionComponent)
                 {
                     CollisionComponent c = collisionComponent;
                     if (collisionComponent.Hitbox.ApproximativeHitbox is HitboxAABB hitbox)
@@ -201,9 +201,9 @@ namespace SpaceInvaders
             }
             if (DrawEntitesBorders)
             {
-                if (entity.GetComponent(typeof(RenderComponent)) is RenderComponent renderComponent)
+                if (entity.Components[typeof(RenderComponent)] is RenderComponent renderComponent)
                 {
-                    Rectangle imageRect = new Rectangle((int)renderComponent.View.x, (int)renderComponent.View.y, renderComponent.Image.Size.Width, renderComponent.Image.Size.Height);
+                    Rectangle imageRect = new Rectangle((int)renderComponent.View.x, (int)renderComponent.View.y, renderComponent.Images.Size.Width, renderComponent.Images.Size.Height);
 
                     Pen greenPen = new Pen(Color.Green)
                     {

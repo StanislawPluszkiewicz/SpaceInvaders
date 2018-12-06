@@ -12,7 +12,7 @@ namespace SpaceInvaders.Entities
 {
     public abstract class Collidable : Moveable
     {
-        public Collidable(Image image, CollisionTag collisionTag) : base(image)
+        public Collidable(CollisionTag collisionTag, Image image = null) : base(image)
         {
             CollisionComponent collisionComponent = new CollisionComponent(this, collisionTag);
             AddComponent(collisionComponent);

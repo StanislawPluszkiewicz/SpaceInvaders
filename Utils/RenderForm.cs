@@ -47,7 +47,7 @@ namespace SpaceInvaders.Utils
         internal bool ObjectIsOnScreen(RenderComponent renderComponent)
         {
             Vector2 topLeftCorner = new Vector2(renderComponent.View.x, renderComponent.View.y);
-            Vector2 bottomRightCorner = new Vector2(renderComponent.View.x + renderComponent.Image.Width, renderComponent.View.y + renderComponent.Image.Height);
+            Vector2 bottomRightCorner = new Vector2(renderComponent.View.x + renderComponent.Images.Width, renderComponent.View.y + renderComponent.Images.Height);
 
             return (bottomRightCorner.x > 0 && topLeftCorner.x < this.Width) && (bottomRightCorner.y > 0 && topLeftCorner.y < this.Height);
         }

@@ -10,31 +10,33 @@ namespace SpaceInvaders.Entities
     {
         protected Entity()
         {
-            components = new Dictionary<Type, Component>();
+            Components = new Dictionary<Type, Component>();
             AddComponent(new TransformComponent(this));
         }
 
     #region Components
-        private Dictionary<Type, Component> components = null;
+        public Dictionary<Type, Component> Components = null;
 
         public void AddComponent(Component component)
         {
-            components.Add(component.GetType(), component);
+            Components.Add(component.GetType(), component);
         }
 
         public void RemoveComponent(Type componentClass)
         {
-            components.Remove(componentClass);
+            Components.Remove(componentClass);
         }
 
+        [Obsolete("GetComponent is deprecated, please use a direct access to the Components dictionnary instead (for debugging purposes).")]
         public Component GetComponent(Type componentClass)
         {
             try
             {
-                return components[componentClass];
-            } catch (KeyNotFoundException e)
+                return Components[componentClass];
+            }
+            catch (KeyNotFoundException e)
             {
-                // L'entite peut ne pas avoir un type de Component
+                //L'entite peut ne pas avoir un type de Component
                 throw e;
             }
         }

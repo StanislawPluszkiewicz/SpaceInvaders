@@ -39,8 +39,8 @@ namespace SpaceInvaders.Systems.Move
             {
                 // Clip movement to the screen without blocking one axis when the other tries to get out of bounds
                 Vector2 newPosition = node.TransformComponent.Position + (movement * node.VelocityComponent.Velocity);
-                newPosition.x = Maths.Clamp(newPosition.x, 0, RenderForm.instance.Width - node.RenderComponent.Image.Width);
-                newPosition.y = Maths.Clamp(newPosition.y, 0, RenderForm.instance.Height - node.RenderComponent.Image.Height);
+                newPosition.x = Maths.Clamp(newPosition.x, 0, RenderForm.instance.Width - node.RenderComponent.Images.Width);
+                newPosition.y = Maths.Clamp(newPosition.y, 0, RenderForm.instance.Height - node.RenderComponent.Images.Height);
                 node.TransformComponent.Position = newPosition;
             }
         }

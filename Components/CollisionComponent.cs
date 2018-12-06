@@ -14,7 +14,7 @@ namespace SpaceInvaders.Components
         public enum CollisionTag { PLAYER = 0, ENNEMI, PLAYER_MISSILE, ENNEMI_MISSILE, BUNKER }; // used as a index
         public CollisionTag Tag { get; set; }
 
-        public Hitbox Hitbox { get; set; }
+        public ShipHitbox Hitbox { get; set; }
         
 
         public delegate void OnCollisionEnter(Collision other);
@@ -27,9 +27,9 @@ namespace SpaceInvaders.Components
         public CollisionComponent(Entity e, CollisionTag tag) : base(e)
         {
             Tag = tag;
-            RenderComponent renderComponent = Entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
-            HitboxAABB body = new HitboxAABB(renderComponent.View.x, renderComponent.Image.Width, renderComponent.View.y, renderComponent.Image.Height);
-            Hitbox = new Hitbox(body, body, null, null);
+            RenderComponent renderComponent = Entity.Components[typeof(RenderComponent)] as RenderComponent;
+            HitboxAABB body = new HitboxAABB(renderComponent.View.x, renderComponent.Images.Width, renderComponent.View.y, renderComponent.Images.Height);
+            Hitbox = new ShipHitbox(body, body, null, null);
         }
 
     }

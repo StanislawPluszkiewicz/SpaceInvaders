@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using SpaceInvaders.Components;
 
-namespace SpaceInvaders.Entities.Ship.Gun
+namespace SpaceInvaders.Entities.Ship.Guns
 {
-    class Gun1 : Gun
+    class Gun3 : Gun
     {
-        public Gun1(CollisionComponent.CollisionTag collisionTag) : base(collisionTag, "01")
+        public Gun3() : base("03")
         {
         }
     }

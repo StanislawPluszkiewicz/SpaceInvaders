@@ -8,16 +8,16 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    public class Renderable : Entity
+    public abstract class Renderable : Entity
     {
-        public Renderable(Image image) : base()
+        public Renderable(Image image=null) : base()
         {
             AddComponent(new RenderComponent(this, image));
         }
 
         public void Render(Graphics g)
         {
-            RenderComponent renderComponent = ((RenderComponent)GetComponent(typeof(RenderComponent)));
+            RenderComponent renderComponent = this.Components[typeof(RenderComponent)] as RenderComponent;
             if (renderComponent.HasTrail)
             {
                 foreach (Vector2 position in renderComponent.TrailPositions)
@@ -25,8 +25,10 @@ namespace SpaceInvaders.Entities
                     g.DrawImage(renderComponent.TrailImage, (float)position.x, (float)position.y);
                 }
             }
-
-            g.DrawImage(renderComponent.Image, (float)renderComponent.View.x, (float)renderComponent.View.y, (float)renderComponent.Image.Width, (float)renderComponent.Image.Height);
+            foreach (Image image in renderComponent.Images)
+            {
+                g.DrawImage(renderComponent.Images, (float)renderComponent.View.x, (float)renderComponent.View.y, (float)renderComponent.Images.Width, (float)renderComponent.Images.Height);
+            }
         }
     }
 }

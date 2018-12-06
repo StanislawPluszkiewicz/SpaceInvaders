@@ -22,11 +22,15 @@ namespace SpaceInvaders.Components
                 position = value;
                 try
                 {
-                    RenderComponent renderComponent = Entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
+                    RenderComponent renderComponent = Entity.Components[typeof(RenderComponent)] as RenderComponent;
                     renderComponent.View = position;
+                    if (Parent != null)
+                    {
+                        renderComponent.View += Parent.Position;
+                    }
                     try
                     {
-                        CollisionComponent collisionComponent = Entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+                        CollisionComponent collisionComponent = Entity.Components[typeof(CollisionComponent)] as CollisionComponent;
                         collisionComponent.Hitbox.Update(renderComponent.View);
                     }
                     catch { }
@@ -36,12 +40,14 @@ namespace SpaceInvaders.Components
         }
         public Vector2 Rotation { get; set; }
         public Vector2 LocalScale { get; set; }
+        public TransformComponent Parent { get; set; }
 
-        public TransformComponent(Entity e) : base(e)
+        public TransformComponent(Entity e, TransformComponent parent = null) : base(e)
         {
             position = new Vector2(0,0);
             Rotation = new Vector2(0, 0);
             LocalScale = new Vector2(1, 1);
+            Parent = parent;
         }
     }
 }

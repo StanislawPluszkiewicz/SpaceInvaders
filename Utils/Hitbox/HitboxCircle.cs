@@ -10,6 +10,12 @@ namespace SpaceInvaders.Utils.Hitbox
     {
         public Vector2 center;
 
+        public HitboxCircle(Vector2 center, Vector2 position)
+        {
+            this.center = center;
+            Position = position;
+        }
+
         public Vector2 Position
         {
             get

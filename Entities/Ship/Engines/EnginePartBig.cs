@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using SpaceInvaders.Components;
 
-namespace SpaceInvaders.Entities.Ship.Engine
+namespace SpaceInvaders.Entities.Ship.Engines
 {
     class EnginePartBig : EnginePart
     {
-        public EnginePartBig(CollisionComponent.CollisionTag collisionTag) : base(collisionTag, 4)
+        public EnginePartBig() : base(4)
         {
         }
     }

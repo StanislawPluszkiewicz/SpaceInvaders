@@ -13,7 +13,7 @@ namespace SpaceInvaders.Systems.Collision
 
         public CollisionNode(Entity entity)
         {
-            CollisionComponent = entity.GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            CollisionComponent = entity.Components[typeof(CollisionComponent)] as CollisionComponent;
         }
 
         public new static bool HasToBeCreated(Entity entity) => entity is Collidable;

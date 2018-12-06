@@ -1,41 +1,51 @@
 ﻿using SpaceInvaders.Components;
-using SpaceInvaders.Systems.Collision;
 using SpaceInvaders.Utils;
 using SpaceInvaders.Utils.GeometricForms;
-using SpaceInvaders.Utils.Hitbox;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using static SpaceInvaders.Components.CollisionComponent;
+using SpaceInvaders;
 
 namespace SpaceInvaders.Entities
 {
-    class Player : Collidable, IKynematic
+    public class Player : Collidable, IKynematic
     {
 
-        public int Lifes { get; set; }
-        public Player() : base(Image.FromFile("../../Resources/PNG/playerShip1_red.png"), CollisionTag.PLAYER)
+        public int Lifes { get; private set; }
+        public Ship.Ship Ship { get; set; }
+        public Player(Ship.Ship ship) : base(CollisionTag.PLAYER)
         {
-            Lifes = 3;
+            Ship = ship;
+            TransformComponent shipTransform = ship.Components[typeof(TransformComponent)] as TransformComponent;
+            TransformComponent transform = this.Components[typeof(TransformComponent)] as TransformComponent;
+            shipTransform.Parent = transform;
 
-            TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
-            RenderComponent renderComponent = (RenderComponent)GetComponent(typeof(RenderComponent));
-            transform.Position.x = RenderForm.instance.Size.Width / 2 - renderComponent.Image.Width / 2;
-            transform.Position.y = RenderForm.instance.Size.Height * 4 / 5;
+            
+
+            SetStartingPosition();
+            SetVelocity();
 
             AddComponent(new ShootComponent(this, 1, 0.2));
+            Lifes = 3;
 
-            VelocityComponent velocity = (VelocityComponent)GetComponent(typeof(VelocityComponent));
-            velocity.Velocity.x = 400;
-            velocity.Velocity.y = 400;
-
-            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            CollisionComponent collisionComponent = this.Components[typeof(CollisionComponent)] as CollisionComponent;
             collisionComponent.onCollisionStay = (Collision collision) =>
             {
                 OnCollisionWithMissile(collision);
             };
+        }
+
+        private void SetVelocity()
+        {
+            VelocityComponent velocity = this.Components[typeof(VelocityComponent)] as VelocityComponent;
+            velocity.Velocity.x = 400;
+            velocity.Velocity.y = 400;
+        }
+        private void SetStartingPosition()
+        {
+            TransformComponent transform = this.Components[typeof(TransformComponent)] as TransformComponent;
+            RenderComponent renderComponent = this.Components[typeof(RenderComponent)] as RenderComponent;
+            transform.Position.x = RenderForm.instance.Size.Width / 2 - renderComponent.Images.Width / 2;
+            transform.Position.y = RenderForm.instance.Size.Height * 4 / 5;
         }
 
         private void TakeDamage()
@@ -53,12 +63,12 @@ namespace SpaceInvaders.Entities
             if (collision.Entity is Missile)
             {
                 TakeDamage();
-                TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
+                TransformComponent transform = this.Components[typeof(TransformComponent)] as TransformComponent;
                 double x = collision.Contacts.x - transform.Position.x;
                 double w = collision.Contacts.Width - transform.Position.x;
                 double y = collision.Contacts.y - transform.Position.y;
                 double h = collision.Contacts.Height - transform.Position.y;
-                RenderComponent renderComponent = GetComponent(typeof(RenderComponent)) as RenderComponent;
+                RenderComponent renderComponent = this.Components[typeof(RenderComponent)] as RenderComponent;
                 if (Tools.ChangeAABBColorToTransparent(renderComponent, new AxisAlignedBoundedBox(x, w, y, h)))
                 {
                     Engine.instance.RemoveEntity(collision.Entity);

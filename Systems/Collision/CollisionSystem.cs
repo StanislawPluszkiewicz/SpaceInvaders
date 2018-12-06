@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using static SpaceInvaders.Components.CollisionComponent;
-using static SpaceInvaders.Utils.Hitbox.Hitbox;
+using static SpaceInvaders.Utils.Hitbox.ShipHitbox;
 
 namespace SpaceInvaders.Systems.Collision
 {

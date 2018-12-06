@@ -22,7 +22,7 @@ namespace SpaceInvaders.Systems.Move.MoveEnnemiLine
                 {
                     foreach(MoveDynamicNode ennemi in node.Nodes)
                     {
-                        if (node.MostLeftNode.TransformComponent.Position.x < 0 || node.MostRightNode.TransformComponent.Position.x > RenderForm.instance.Width - ennemi.RenderComponent.Image.Width)
+                        if (node.MostLeftNode.TransformComponent.Position.x < 0 || node.MostRightNode.TransformComponent.Position.x > RenderForm.instance.Width - ennemi.RenderComponent.Images.Width)
                         {
                             ennemi.VelocityComponent.Velocity.x = -ennemi.VelocityComponent.Velocity.x;
                             ennemi.TransformComponent.Position.y += 10;

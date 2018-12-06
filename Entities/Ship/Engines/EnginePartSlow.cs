@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using SpaceInvaders.Components;
 
-namespace SpaceInvaders.Entities.Ship.Engine
+namespace SpaceInvaders.Entities.Ship.Engines
 {
     class EnginePartSlow : EnginePart
     {
-        public EnginePartSlow(CollisionComponent.CollisionTag collisionTag) : base(collisionTag, 5)
+        public EnginePartSlow() : base(5)
         {
         }
     }

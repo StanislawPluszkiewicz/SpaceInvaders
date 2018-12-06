@@ -7,9 +7,9 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    public class Moveable : Renderable
+    public abstract class Moveable : Renderable
     {
-        public Moveable(Image image) : base(image)
+        public Moveable(Image image=null) : base(image)
         {
             AddComponent(new VelocityComponent(this));
         }

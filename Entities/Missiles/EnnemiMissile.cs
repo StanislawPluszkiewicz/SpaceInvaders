@@ -14,11 +14,11 @@ namespace SpaceInvaders.Entities.Missiles
     {
         public EnnemiMissile(Entity e) : base(e, Image.FromFile("../../Resources/old/shoot1.png"), CollisionTag.ENNEMI_MISSILE)
         {
-            VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
+            VelocityComponent velocity = this.Components[typeof(VelocityComponent)] as VelocityComponent;
             velocity.Velocity.x = 0;
             velocity.Velocity.y = 125;
 
-            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            CollisionComponent collisionComponent = this.Components[typeof(CollisionComponent)] as CollisionComponent;
             collisionComponent.onCollisionEnter = (Collision collision) =>
             {
                 if (collision.Entity is Player)

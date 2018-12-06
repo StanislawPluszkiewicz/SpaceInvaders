@@ -14,18 +14,18 @@ namespace SpaceInvaders.Entities
 {
     class Bunker : Collidable, IStatic
     {
-        public Bunker(Vector2 position) : base(Image.FromFile("../../Resources/old/bunker.png"), CollisionTag.BUNKER)
+        public Bunker(Vector2 position) : base(CollisionTag.BUNKER, Image.FromFile("../../Resources/old/bunker.png"))
         {
-            TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
+            TransformComponent transform = this.Components[typeof(TransformComponent)] as TransformComponent;
             transform.Position = position;
 
             AddComponent(new ShootComponent(this, 1, 0.2));
 
-            VelocityComponent velocity = (VelocityComponent)GetComponent(typeof(VelocityComponent));
+            VelocityComponent velocity = this.Components[typeof(VelocityComponent)] as VelocityComponent;
             velocity.Velocity.x = 0;
             velocity.Velocity.y = 0;
 
-            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            CollisionComponent collisionComponent = this.Components[typeof(CollisionComponent)] as CollisionComponent;
             collisionComponent.onCollisionStay = (Collision collision) =>
             {
                 OnCollisionWithMissile(collision);
@@ -37,12 +37,12 @@ namespace SpaceInvaders.Entities
         {
             if (collision.Entity is Missile)
             {
-                TransformComponent transform = (TransformComponent)GetComponent(typeof(TransformComponent));
+                TransformComponent transform = this.Components[typeof(TransformComponent)] as TransformComponent;
                 double x = collision.Contacts.x - transform.Position.x;
                 double w = collision.Contacts.Width - transform.Position.x;
                 double y = collision.Contacts.y - transform.Position.y;
                 double h = collision.Contacts.Height - transform.Position.y;
-                RenderComponent renderComponent = GetComponent(typeof(RenderComponent)) as RenderComponent;
+                RenderComponent renderComponent = this.Components[typeof(RenderComponent)] as RenderComponent;
                 if (Tools.ChangeAABBColorToTransparent(renderComponent, new AxisAlignedBoundedBox(x, w, y, h)))
                 {
                     Engine.instance.RemoveEntity(collision.Entity);

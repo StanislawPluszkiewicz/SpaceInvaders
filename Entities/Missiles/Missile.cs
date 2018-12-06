@@ -12,23 +12,23 @@ namespace SpaceInvaders.Entities
 {
     abstract class Missile : Collidable, IDynamic
     {
-        public Missile(Entity e, Image image, CollisionTag collisionTag, Image imageTrail = null, Vector2 trailOffset = null) : base(image, collisionTag)
+        public Missile(Entity e, Image image, CollisionTag collisionTag, Image imageTrail = null, Vector2 trailOffset = null) : base(collisionTag, image)
         {
-            RenderComponent renderComponent = GetComponent(typeof(RenderComponent)) as RenderComponent;
+            RenderComponent renderComponent = this.Components[typeof(RenderComponent)] as RenderComponent;
             if (imageTrail != null && trailOffset != null)
             {
                 renderComponent.SetTrail(imageTrail, trailOffset);
             }
 
-            TransformComponent parentTransform = e.GetComponent(typeof(TransformComponent)) as TransformComponent;
-            TransformComponent transform = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            TransformComponent parentTransform = e.Components[typeof(TransformComponent)] as TransformComponent;
+            TransformComponent transform = this.Components[typeof(TransformComponent)] as TransformComponent;
             transform.Position = parentTransform.Position;
 
-            VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
+            VelocityComponent velocity = this.Components[typeof(VelocityComponent)] as VelocityComponent;
             velocity.Acceleration.x = 0;
             velocity.Acceleration.y = 2.5;
 
-            CollisionComponent collisionComponent = GetComponent(typeof(CollisionComponent)) as CollisionComponent;
+            CollisionComponent collisionComponent = this.Components[typeof(CollisionComponent)] as CollisionComponent;
         }
     }
 }

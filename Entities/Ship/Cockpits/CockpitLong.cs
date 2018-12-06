@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using SpaceInvaders.Components;
 
-namespace SpaceInvaders.Entities.Ship.Cockpit
+namespace SpaceInvaders.Entities.Ship.Cockpits
 {
     class CockpitLong : Cockpit
     {
-        public CockpitLong(CollisionComponent.CollisionTag collisionTag, COLOR color) : base(collisionTag, color, 3)
+        public CockpitLong(COLOR color) : base(color, 2)
         {
         }
     }

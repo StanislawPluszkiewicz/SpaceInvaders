@@ -13,7 +13,7 @@ namespace SpaceInvaders.Systems.Shoot
 
         public ShootNode(Entity entity)
         {
-            MissileComponent = entity.GetComponent(typeof(ShootComponent)) as ShootComponent;
+            MissileComponent = entity.Components[typeof(ShootComponent)] as ShootComponent;
         }
 
         public new static bool HasToBeCreated(Entity entity) => entity.GetType() == typeof(Ennemi) || entity.GetType() == typeof(Player);

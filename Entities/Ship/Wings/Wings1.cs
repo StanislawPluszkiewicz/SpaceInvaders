@@ -7,9 +7,9 @@ using SpaceInvaders.Components;
 
 namespace SpaceInvaders.Entities.Ship.Wings
 {
-    class Wings1 : Wings
+    class Wings1 : WingsPart
     {
-        public Wings1(CollisionComponent.CollisionTag collisionTag, COLOR color) : base(collisionTag, color, 1)
+        public Wings1(COLOR color) : base(color, 1)
         {
         }
     }

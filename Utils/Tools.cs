@@ -26,10 +26,10 @@ namespace SpaceInvaders.Utils
             {
                 for (int j = (int)rectToColor.y; j < (int)(rectToColor.y + rectToColor.Height); j++)
                 {
-                    actualColor = ((Bitmap)renderComponent.Image).GetPixel(i, j);
+                    actualColor = ((Bitmap)renderComponent.Images).GetPixel(i, j);
                     if (actualColor.A == 255 && actualColor.R == 0 && actualColor.B == 0 && actualColor.G == 0)
                     {
-                        ((Bitmap)renderComponent.Image).SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
+                        ((Bitmap)renderComponent.Images).SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
                         bitmapHasChanged = true;
                     }
 

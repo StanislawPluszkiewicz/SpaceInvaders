@@ -14,7 +14,7 @@ namespace SpaceInvaders.Systems.OffScreenColider
 
         public OffScreenColiderNode(Entity entity)
         {
-            RenderComponent = entity.GetComponent(typeof(RenderComponent)) as RenderComponent;
+            RenderComponent = entity.Components[typeof(RenderComponent)] as RenderComponent;
         }
 
         public static new bool HasToBeCreated(Entity e) => e is Missile;

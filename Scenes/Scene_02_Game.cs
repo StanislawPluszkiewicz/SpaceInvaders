@@ -1,5 +1,7 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Entities.Ship;
+using SpaceInvaders.Entities.Ship.Cockpits;
 using SpaceInvaders.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,14 @@ namespace SpaceInvaders.Scenes
             InstantiateMenuManagement();
             SpawnEnnemiWave();
             SpawnBunkers();
-            Engine.instance.AddEntity(new Player());
+            InstantiatePlayer();
+        }
+
+        public void InstantiatePlayer()
+        {
+            ShipPart.COLOR color = ShipPart.COLOR.YELLOW;
+            Player player = new Player(new Ship(color, 0, 0, 0, 0));
+            Engine.instance.AddEntity(player);
         }
 
         public void InstantiateMenuManagement()
@@ -39,10 +48,10 @@ namespace SpaceInvaders.Scenes
                     Ennemi ennemi = new Ennemi();
                     ennemiLineList.Add(ennemi);
                     Engine.instance.AddEntity(ennemi);
-                    TransformComponent positionComponent = (TransformComponent)ennemi.GetComponent(typeof(TransformComponent));
-                    RenderComponent renderComponent = (RenderComponent)ennemi.GetComponent(typeof(RenderComponent));
-                    float height = (RenderForm.instance.Height * .2f) + y * (renderComponent.Image.Height + 15);
-                    float width = x * (renderComponent.Image.Width + 40);
+                    TransformComponent positionComponent = ennemi.Components[typeof(TransformComponent)] as TransformComponent;
+                    RenderComponent renderComponent = ennemi.Components[typeof(RenderComponent)] as RenderComponent;
+                    float height = (RenderForm.instance.Height * .2f) + y * (renderComponent.Images.Height + 15);
+                    float width = x * (renderComponent.Images.Width + 40);
                     positionComponent.Position = new Vector2(width, height);
                 }
                 EnnemiLine ennemiLine = new EnnemiLine(ennemiLineList);
